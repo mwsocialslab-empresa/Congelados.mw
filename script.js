@@ -337,5 +337,5 @@ function sendWhatsAppOrder() {
     message += `📌 *Número de Pedido:* ${orderNumber}`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5491112345678?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/5491127461954?text=${encodedMessage}`, '_blank');
 }
