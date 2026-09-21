@@ -322,7 +322,7 @@ function sendWhatsAppOrder() {
                       (now.getMonth() + 1).toString().padStart(2, '0') +
                       now.getDate().toString().padStart(2, '0');
     const randomDigits = Math.floor(1000 + Math.random() * 9000); // 4 dígitos aleatorios
-    const orderNumber = `GV-${timestamp}-${randomDigits}`;
+    const orderNumber = `${randomDigits}`;
 
     // Construcción del mensaje de WhatsApp
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n\n`;
