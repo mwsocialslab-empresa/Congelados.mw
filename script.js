@@ -316,13 +316,15 @@ function sendWhatsAppOrder() {
         return;
     }
 
-    // Generar un número de pedido único basado en la fecha/hora actual (ej: GV-20260921-8492)
+    // Generar un número de pedido único en formato día/mes/año (ej: GV-21092026-8492)
     const now = new Date();
-    const timestamp = now.getFullYear().toString() +
-                      (now.getMonth() + 1).toString().padStart(2, '0') +
-                      now.getDate().toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const year = now.getFullYear();
+
+    const timestamp = `${day}${month}${year}`; // DDMMYYYY
     const randomDigits = Math.floor(1000 + Math.random() * 9000); // 4 dígitos aleatorios
-    const orderNumber = `${randomDigits}`;
+    const orderNumber = `GV-${timestamp}-${randomDigits}`;
 
     // Construcción del mensaje de WhatsApp
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n\n`;
