@@ -7,7 +7,8 @@ const products = [
     { id: 5, name: 'Mix de Vegetales Grillados', category: 'Vegetales', price: 1900, image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80', featured: false },
     { id: 6, name: 'Bondiola de Cerdo a la Miel', category: 'Carnes', price: 3900, image: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=600&q=80', featured: false },
     { id: 7, name: 'Espárragos y Zanahorias Baby', category: 'Vegetales', price: 2100, image: 'https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?auto=format&fit=crop&w=600&q=80', featured: false },
-    { id: 8, name: 'Costillitas BBQ Sous-Vide', category: 'Platos Listos', price: 4800, image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80', featured: true }
+    { id: 8, name: 'Costillitas BBQ Sous-Vide', category: 'Platos Listos', price: 4800, image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80', featured: true },
+    { id: 9, name: 'Costillitas B', category: 'Platos Listos', price: 4800, image:'./imagen/ima1.jpeg', featured: true }
 ];
 
 // Datos de recetas
@@ -315,14 +316,26 @@ function sendWhatsAppOrder() {
         return;
     }
 
-    let message = "Hola GourmetVac! Quisiera realizar el siguiente pedido:\n\n";
+    // Generar un número de pedido único basado en la fecha/hora actual (ej: GV-20260921-8492)
+    const now = new Date();
+    const timestamp = now.getFullYear().toString() +
+                      (now.getMonth() + 1).toString().padStart(2, '0') +
+                      now.getDate().toString().padStart(2, '0');
+    const randomDigits = Math.floor(1000 + Math.random() * 9000); // 4 dígitos aleatorios
+    const orderNumber = `GV-${timestamp}-${randomDigits}`;
+
+    // Construcción del mensaje de WhatsApp
+    let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n\n`;
+    message += "Hola GourmetVac! Quisiera realizar el siguiente pedido:\n\n";
+
     cart.forEach(item => {
         message += `• ${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toLocaleString()}\n`;
     });
     
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `\n*Total Estimado:* $${total.toLocaleString()}`;
+    message += `\n*Total Estimado:* $${total.toLocaleString()}\n\n`;
+    message += `📌 *Número de Pedido:* ${orderNumber}`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5491127461954?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/5491112345678?text=${encodedMessage}`, '_blank');
 }
