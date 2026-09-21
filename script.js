@@ -336,7 +336,7 @@ function sendWhatsAppOrder() {
     
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     message += `\n*Total Estimado:* $${total.toLocaleString()}\n\n`;
-    message += `📌 *Número de Pedido:* ${orderNumber}`;
+    
 
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5491127461954?text=${encodedMessage}`, '_blank');
