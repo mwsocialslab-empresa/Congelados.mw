@@ -37,9 +37,17 @@ let cart = [];
 let currentSlide = 0;
 let selectedCategory = 'Todos';
 let carouselInterval = null;
+let toastTimeout; // Variable para el toast
 
 // Inicialización de la app
 document.addEventListener('DOMContentLoaded', () => {
+    // --- NUEVO CÓDIGO: Forzar el scroll siempre arriba ---
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+    // -----------------------------------------------------
+
     initCarousel();
     renderCategories();
     renderProducts();
@@ -214,7 +222,7 @@ function renderRecipes() {
     `).join('');
 }
 
-// Modales y Carrito
+// Modales de Receta
 function openRecipeModal(index) {
     const recipe = recipes[index];
     const modal = document.getElementById('recipe-modal');
@@ -233,6 +241,23 @@ function closeRecipeModal() {
     const modal = document.getElementById('recipe-modal');
     if (modal) modal.classList.add('hidden');
 }
+
+// Funcionalidad de Preguntas Frecuentes (Acordeón)
+function toggleFaq(id) {
+    const content = document.getElementById(`faq-content-${id}`);
+    const icon = document.getElementById(`faq-icon-${id}`);
+    if (!content || !icon) return;
+
+    if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+    } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+    }
+}
+
+// LÓGICA DEL CARRITO RECUPERADA
 
 function toggleCartModal() {
     const modal = document.getElementById('cart-modal');
@@ -257,6 +282,7 @@ function addToCart(id) {
         if (product) cart.push({ ...product, quantity: 1 });
     }
     updateCartUI();
+    showToast('¡Agregado al carrito!'); // Notificación visual
 }
 
 function updateCartQuantity(id, delta) {
@@ -316,17 +342,15 @@ function sendWhatsAppOrder() {
         return;
     }
 
-    // Generar un número de pedido único en formato día/mes/año (ej: GV-21092026-8492)
     const now = new Date();
     const day = now.getDate().toString().padStart(2, '0');
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
     const year = now.getFullYear();
 
-    const timestamp = `${day}${month}${year}`; // DDMMYYYY
-    const randomDigits = Math.floor(1000 + Math.random() * 9000); // 4 dígitos aleatorios
+    const timestamp = `${day}${month}${year}`;
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
     const orderNumber = `GV-${timestamp}-${randomDigits}`;
 
-    // Construcción del mensaje de WhatsApp
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n\n`;
     message += "Hola GourmetVac! Quisiera realizar el siguiente pedido:\n\n";
 
@@ -337,7 +361,22 @@ function sendWhatsAppOrder() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     message += `\n*Total Estimado:* $${total.toLocaleString()}\n\n`;
     
-
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5491127461954?text=${encodedMessage}`, '_blank');
+}
+
+// Función para mostrar notificación Toast
+function showToast(message) {
+    const toast = document.getElementById('toast-notification');
+    const toastMsg = document.getElementById('toast-message');
+    if (!toast || !toastMsg) return;
+
+    toastMsg.innerText = message;
+    
+    toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+    
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+    }, 2500);
 }

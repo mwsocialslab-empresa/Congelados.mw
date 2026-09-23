@@ -66,6 +66,7 @@
                     <a href="#destacados" class="hover:text-emerald-600 transition-colors">Destacados</a>
                     <a href="#catalogo" class="hover:text-emerald-600 transition-colors">Catálogo</a>
                     <a href="#recetas" class="hover:text-emerald-600 transition-colors">Recetas & Tips</a>
+                    <a href="#faq" class="hover:text-emerald-600 transition-colors">Preguntas</a>
                     <a href="#contacto" class="hover:text-emerald-600 transition-colors">Contacto</a>
                 </nav>
 
@@ -213,6 +214,50 @@
             </div>
         </div>
     </section>
+    <!-- Sección de Preguntas Frecuentes -->
+    <section id="faq" class="py-16 bg-gray-50 border-t border-gray-100">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-emerald-600 font-bold text-xs uppercase tracking-widest">Dudas Comunes</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-1">Preguntas Frecuentes</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Pregunta 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors">
+                        <span class="font-semibold text-gray-900">¿Cuánto tiempo duran los productos envasados al vacío?</span>
+                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-1" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed">
+                        Nuestros productos frescos pueden durar entre 15 y 30 días en la heladera gracias a la extracción de oxígeno. Si los congelas, mantienen su calidad, sabor y textura hasta por 6 meses.
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors">
+                        <span class="font-semibold text-gray-900">¿Hacen envíos a domicilio?</span>
+                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-2" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed">
+                        Sí, realizamos envíos programados en CABA y Gran Buenos Aires. Transportamos todos los pedidos manteniendo la cadena de frío estricta para garantizar la frescura de los alimentos.
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors">
+                        <span class="font-semibold text-gray-900">¿Puedo calentar la bolsa directo en el agua?</span>
+                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-3" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed">
+                        ¡Totalmente! Utilizamos bolsas de alta barrera libres de BPA aptas para cocción (Sous-Vide) y regeneración térmica. Puedes sumergirlas en agua caliente o microondas con total seguridad.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer id="contacto" class="bg-gray-900 text-gray-300 py-12">
@@ -283,7 +328,7 @@
     </footer>
 
     <!-- Botón Flotante de WhatsApp (Izquierda) -->
-    <a href="https://wa.me/5491127461954?text=Hola%20GourmetVac!%20Quisiera%20hacer%20una%20consulta." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 left-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all transform hover:scale-110 group" aria-label="Contacto por WhatsApp">
+    <a href="https://wa.me/5491127461954?text=Hola%20GourmetVac!%20Quisiera%20hacer%20una%20consulta." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all transform hover:scale-110 group" aria-label="Contacto por WhatsApp">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
         <span class="absolute left-16 bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">
             ¡Escríbenos por WhatsApp!
@@ -335,7 +380,15 @@
             </div>
         </div>
     </div>
-
+    <!-- Toast / Notificación de Éxito -->
+    <div id="toast-notification" class="fixed bottom-24 right-6 z-50 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
+        <div class="bg-emerald-500 w-8 h-8 rounded-full flex items-center justify-center shadow-inner">
+            <i class="fa-solid fa-check text-white"></i>
+        </div>
+        <div class="text-sm font-medium pr-2" id="toast-message">
+            ¡Agregado al carrito!
+        </div>
+    </div>
     <!-- Script de lógica de la aplicación -->
     <script src="script.js"></script>
 </body>
