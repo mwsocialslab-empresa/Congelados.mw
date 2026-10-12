@@ -6,35 +6,33 @@
     <title>GourmetVac - Productos Envasados al Vacío</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tailwind Config for custom colors -->
+    <!-- Tailwind Config for custom dark colors -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        // Paleta Frescura & Salud
                         fresh: {
-                            50: '#f0fdf4',   // Fondo menta ultra suave
-                            100: '#dcfce7',  // Acento suave
-                            500: '#22c55e',  // Menta vibrante
-                            600: '#16a34a',  // Verde principal fresco
-                            700: '#15803d',  // Verde profundo para textos
-                            800: '#166534',
-                            900: '#14532d',
+                            50: '#022c22',   // Menta muy oscuro
+                            100: '#064e3b',  // Acento suave oscuro
+                            500: '#10b981',  // Menta vibrante
+                            600: '#059669',  // Verde principal
+                            700: '#047857',  // Verde profundo
+                            800: '#065f46',
+                            900: '#064e3b',
                         },
-                        // Tonos relajantes para fondos
                         relax: {
-                            bg: '#f8faf9',    // Fondo general mate/saludable
-                            card: '#ffffff',  // Blanco puro para destacar fotos
-                            dark: '#0f172a'   // Contraste suave para pie de página
+                            bg: '#0f172a',    // Fondo general noche (slate-900)
+                            card: '#1e293b',  // Fondo tarjetas noche (slate-800)
+                            dark: '#020617'   // Contraste pie de página (slate-950)
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
                     boxShadow: {
-                        'soft-fresh': '0 10px 30px -10px rgba(22, 163, 74, 0.08)',
-                        'card-float': '0 20px 40px -15px rgba(0, 0, 0, 0.05)'
+                        'soft-fresh': '0 10px 30px -10px rgba(16, 185, 129, 0.1)',
+                        'card-float': '0 20px 40px -15px rgba(0, 0, 0, 0.3)'
                     }
                 }
             }
@@ -50,42 +48,42 @@
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-relax-bg text-slate-800 flex flex-col min-h-screen relative font-sans antialiased selection:bg-fresh-100 selection:text-fresh-800">
+<body class="bg-relax-bg text-slate-300 flex flex-col min-h-screen relative font-sans antialiased selection:bg-fresh-500 selection:text-white">
 
     <!-- Header & Navigation -->
-    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-sm border-b border-fresh-100/60 transition-all">
+    <header class="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-md shadow-md border-b border-slate-800 transition-all">
         <div class="max-w-[95%] mx-auto px-2 sm:px-4">
             <div class="flex items-center justify-between h-20">
                 
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-emerald-200">
+                    <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-emerald-900/50">
                         <i class="fa-solid fa-box-archive text-xl"></i>
                     </div>
                     <div>
-                        <span class="text-xl font-bold text-gray-900 tracking-tight">Gourmet<span class="text-emerald-600">Vac</span></span>
-                        <span class="block text-xs text-gray-500 -mt-1 font-medium">Sabor & Frescura Sellada</span>
+                        <span class="text-xl font-bold text-white tracking-tight">Gourmet<span class="text-emerald-500">Vac</span></span>
+                        <span class="block text-xs text-slate-400 -mt-1 font-medium">Sabor & Frescura Sellada</span>
                     </div>
                 </div>
 
                 <!-- Desktop Navigation Links -->
-                <nav class="hidden md:flex space-x-8 text-sm font-semibold text-gray-700">
-                    <a href="#hero" class="hover:text-emerald-600 transition-colors">Inicio</a>
-                    <a href="#destacados" class="hover:text-emerald-600 transition-colors">Destacados</a>
-                    <a href="#catalogo" class="hover:text-emerald-600 transition-colors">Catálogo</a>
-                    <a href="#recetas" class="hover:text-emerald-600 transition-colors">Recetas & Tips</a>
-                    <a href="#faq" class="hover:text-emerald-600 transition-colors">Preguntas</a>
-                    <a href="#contacto" class="hover:text-emerald-600 transition-colors">Contacto</a>
+                <nav class="hidden md:flex space-x-8 text-sm font-semibold text-slate-300">
+                    <a href="#hero" class="hover:text-emerald-400 transition-colors">Inicio</a>
+                    <a href="#destacados" class="hover:text-emerald-400 transition-colors">Destacados</a>
+                    <a href="#catalogo" class="hover:text-emerald-400 transition-colors">Catálogo</a>
+                    <a href="#recetas" class="hover:text-emerald-400 transition-colors">Recetas & Tips</a>
+                    <a href="#faq" class="hover:text-emerald-400 transition-colors">Preguntas</a>
+                    <a href="#contacto" class="hover:text-emerald-400 transition-colors">Contacto</a>
                 </nav>
 
                 <!-- Cart Action Button -->
                 <div class="flex items-center space-x-4">
-                    <button onclick="toggleCartModal()" class="relative bg-emerald-50 text-emerald-700 hover:bg-emerald-100 p-2.5 rounded-full transition-all focus:outline-none">
+                    <button onclick="toggleCartModal()" class="relative bg-slate-800 text-emerald-400 hover:bg-slate-700 p-2.5 rounded-full transition-all focus:outline-none">
                         <i class="fa-solid fa-cart-shopping text-lg"></i>
                         <span id="cart-badge" class="absolute -top-1 -right-1 bg-emerald-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
                     </button>
                     <!-- Mobile menu button -->
-                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-slate-400 hover:text-white focus:outline-none">
                         <i class="fa-solid fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -93,29 +91,29 @@
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-4 space-y-2">
-            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-emerald-600">Inicio</a>
-            <a href="#destacados" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-emerald-600">Destacados</a>
-            <a href="#catalogo" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-emerald-600">Catálogo</a>
-            <a href="#recetas" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-emerald-600">Recetas & Tips</a>
-            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2 text-gray-700 font-medium hover:text-emerald-600">Contacto</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 font-medium hover:text-emerald-400">Inicio</a>
+            <a href="#destacados" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 font-medium hover:text-emerald-400">Destacados</a>
+            <a href="#catalogo" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 font-medium hover:text-emerald-400">Catálogo</a>
+            <a href="#recetas" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 font-medium hover:text-emerald-400">Recetas & Tips</a>
+            <a href="#contacto" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 font-medium hover:text-emerald-400">Contacto</a>
         </div>
     </header>
 
     <!-- Hero Carousel Section -->
-    <section id="hero" class="relative bg-gray-900 overflow-hidden">
+    <section id="hero" class="relative bg-black overflow-hidden">
         <div id="carousel-container" class="relative h-[420px] sm:h-[480px] w-full">
             <!-- Carousel Slides -->
             <div id="slides-wrapper" class="h-full w-full flex transition-transform duration-500 ease-out">
                 
                 <!-- Slide 1 -->
                 <div class="min-w-full h-full relative flex items-center justify-center text-center px-4">
-                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1400&q=80" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Carnes maduradas">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1400&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="Carnes maduradas">
                     <div class="relative z-10 max-w-2xl">
-                        <span class="inline-block bg-emerald-600 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider mb-3">Envasado Premium</span>
-                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">Carnes y Tiernos Cortes al Vacío</h1>
-                        <p class="text-gray-200 text-base sm:text-lg mb-6">Conserva todo el jugo, la textura y el sabor original por mucho más tiempo.</p>
-                        <a href="#catalogo" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
+                        <span class="inline-block bg-emerald-600 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider mb-3 shadow-lg">Envasado Premium</span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">Carnes y Tiernos Cortes al Vacío</h1>
+                        <p class="text-slate-200 text-base sm:text-lg mb-6 drop-shadow-md">Conserva todo el jugo, la textura y el sabor original por mucho más tiempo.</p>
+                        <a href="#catalogo" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
                             <span>Ver Catálogo</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -124,12 +122,12 @@
 
                 <!-- Slide 2 -->
                 <div class="min-w-full h-full relative flex items-center justify-center text-center px-4">
-                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1400&q=80" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Vegetales Congelados">
+                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1400&q=80" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="Vegetales Congelados">
                     <div class="relative z-10 max-w-2xl">
-                        <span class="inline-block bg-emerald-600 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider mb-3">100% Saludable</span>
-                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">Vegetales Listos para Cocinar</h1>
-                        <p class="text-gray-200 text-base sm:text-lg mb-6">Cortados, lavados y ultracongelados al vacío sin conservantes.</p>
-                        <a href="#catalogo" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
+                        <span class="inline-block bg-emerald-600 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider mb-3 shadow-lg">100% Saludable</span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">Vegetales Listos para Cocinar</h1>
+                        <p class="text-slate-200 text-base sm:text-lg mb-6 drop-shadow-md">Cortados, lavados y ultracongelados al vacío sin conservantes.</p>
+                        <a href="#catalogo" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
                             <span>Explorar Vegetales</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -138,12 +136,12 @@
 
                 <!-- Slide 3 -->
                 <div class="min-w-full h-full relative flex items-center justify-center text-center px-4">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80" class="absolute inset-0 w-full h-full object-cover opacity-40" alt="Platos preparados">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="Platos preparados">
                     <div class="relative z-10 max-w-2xl">
-                        <span class="inline-block bg-amber-500 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider mb-3">Solución Rápida</span>
-                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 leading-tight">Comidas Gourmet en Minutos</h1>
-                        <p class="text-gray-200 text-base sm:text-lg mb-6">Solo calienta en agua caliente o microondas y disfruta de una cena perfecta.</p>
-                        <a href="#catalogo" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
+                        <span class="inline-block bg-amber-500 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider mb-3 shadow-lg">Solución Rápida</span>
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">Comidas Gourmet en Minutos</h1>
+                        <p class="text-slate-200 text-base sm:text-lg mb-6 drop-shadow-md">Solo calienta en agua caliente o microondas y disfruta de una cena perfecta.</p>
+                        <a href="#catalogo" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-all inline-flex items-center space-x-2">
                             <span>Probar Platos</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -153,10 +151,10 @@
             </div>
 
             <!-- Carousel Nav Buttons -->
-            <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full backdrop-blur-md transition-all">
+            <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-md transition-all">
                 <i class="fa-solid fa-chevron-left"></i>
             </button>
-            <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white p-3 rounded-full backdrop-blur-md transition-all">
+            <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-md transition-all">
                 <i class="fa-solid fa-chevron-right"></i>
             </button>
 
@@ -166,15 +164,15 @@
     </section>
 
     <!-- Escaparate / Productos Destacados -->
-    <section id="destacados" class="py-12 bg-white border-b border-gray-100">
+    <section id="destacados" class="py-12 bg-slate-900 border-b border-slate-800">
         <div class="max-w-[95%] mx-auto px-2 sm:px-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between mb-8">
                 <div>
-                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Destacados de la Semana</h2>
-                    <p class="text-gray-500 text-sm mt-1">Los favoritos de nuestros clientes por su frescura y practicidad.</p>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white">Destacados de la Semana</h2>
+                    <p class="text-slate-400 text-sm mt-1">Los favoritos de nuestros clientes por su frescura y practicidad.</p>
                 </div>
-                <span class="hidden sm:inline-flex text-emerald-600 font-semibold items-center space-x-1 text-sm">
+                <span class="hidden sm:inline-flex text-emerald-400 font-semibold items-center space-x-1 text-sm">
                     <i class="fa-solid fa-fire text-amber-500"></i>
                     <span>Ofertas Especiales</span>
                 </span>
@@ -189,12 +187,12 @@
     </section>
 
     <!-- Main Catalogue with Dynamic Filtering -->
-    <section id="catalogo" class="py-16 bg-gray-50 flex-grow">
+    <section id="catalogo" class="py-16 bg-slate-950 flex-grow">
         <div class="max-w-[95%] mx-auto px-2 sm:px-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-10">
-                <h2 class="text-3xl font-bold text-gray-900">Nuestros Productos</h2>
-                <p class="text-gray-600 mt-2">Explora nuestro menú organizado por categorías. Conservación garantizada y máxima higiene.</p>
+                <h2 class="text-3xl font-bold text-white">Nuestros Productos</h2>
+                <p class="text-slate-400 mt-2">Explora nuestro menú organizado por categorías. Conservación garantizada y máxima higiene.</p>
             </div>
 
             <!-- Category Filters Tabs -->
@@ -213,13 +211,13 @@
     </section>
 
     <!-- Recipe and Tips Section -->
-    <section id="recetas" class="py-16 bg-white border-t border-gray-100">
+    <section id="recetas" class="py-16 bg-slate-900 border-t border-slate-800">
         <div class="max-w-[95%] mx-auto px-2 sm:px-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-emerald-600 font-bold text-xs uppercase tracking-widest">Aprende & Disfruta</span>
-                <h2 class="text-3xl font-bold text-gray-900 mt-1">Recetas & Consejos de Cocina</h2>
-                <p class="text-gray-500 text-sm mt-2">Sácale el máximo provecho a tus empaques al vacío con técnicas de regeneración y Sous Vide.</p>
+                <span class="text-emerald-500 font-bold text-xs uppercase tracking-widest">Aprende & Disfruta</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Recetas & Consejos de Cocina</h2>
+                <p class="text-slate-400 text-sm mt-2">Sácale el máximo provecho a tus empaques al vacío con técnicas de regeneración y Sous Vide.</p>
             </div>
 
             <div id="recipe-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -229,44 +227,44 @@
         </div>
     </section>
     <!-- Sección de Preguntas Frecuentes -->
-    <section id="faq" class="py-16 bg-gray-50 border-t border-gray-100">
+    <section id="faq" class="py-16 bg-slate-950 border-t border-slate-800">
         <div class="max-w-[95%] mx-auto px-2 sm:px-4">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <span class="text-emerald-600 font-bold text-xs uppercase tracking-widest">Dudas Comunes</span>
-                <h2 class="text-3xl font-bold text-gray-900 mt-1">Preguntas Frecuentes</h2>
+                <span class="text-emerald-500 font-bold text-xs uppercase tracking-widest">Dudas Comunes</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Preguntas Frecuentes</h2>
             </div>
             
             <div class="space-y-4">
                 <!-- Pregunta 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors">
-                        <span class="font-semibold text-gray-900">¿Cuánto tiempo duran los productos envasados al vacío?</span>
-                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                <div class="bg-slate-800 rounded-xl shadow-md border border-slate-700 overflow-hidden">
+                    <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-slate-700/50 transition-colors">
+                        <span class="font-semibold text-white">¿Cuánto tiempo duran los productos envasados al vacío?</span>
+                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-500 transition-transform duration-300"></i>
                     </button>
-                    <div id="faq-content-1" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed">
+                    <div id="faq-content-1" class="hidden px-5 pb-5 text-sm text-slate-400 leading-relaxed">
                         Nuestros productos frescos pueden durar entre 15 y 30 días en la heladera gracias a la extracción de oxígeno. Si los congelas, mantienen su calidad, sabor y textura hasta por 6 meses.
                     </div>
                 </div>
 
                 <!-- Pregunta 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <button onclick="toggleFaq(2)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors">
-                        <span class="font-semibold text-gray-900">¿Hacen envíos a domicilio?</span>
-                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                <div class="bg-slate-800 rounded-xl shadow-md border border-slate-700 overflow-hidden">
+                    <button onclick="toggleFaq(2)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-slate-700/50 transition-colors">
+                        <span class="font-semibold text-white">¿Hacen envíos a domicilio?</span>
+                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-500 transition-transform duration-300"></i>
                     </button>
-                    <div id="faq-content-2" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed">
+                    <div id="faq-content-2" class="hidden px-5 pb-5 text-sm text-slate-400 leading-relaxed">
                         Sí, realizamos envíos programados en CABA y Gran Buenos Aires. Transportamos todos los pedidos manteniendo la cadena de frío estricta para garantizar la frescura de los alimentos.
                     </div>
                 </div>
 
                 <!-- Pregunta 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <button onclick="toggleFaq(3)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors">
-                        <span class="font-semibold text-gray-900">¿Puedo calentar la bolsa directo en el agua?</span>
-                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                <div class="bg-slate-800 rounded-xl shadow-md border border-slate-700 overflow-hidden">
+                    <button onclick="toggleFaq(3)" class="w-full flex justify-between items-center p-5 text-left focus:outline-none hover:bg-slate-700/50 transition-colors">
+                        <span class="font-semibold text-white">¿Puedo calentar la bolsa directo en el agua?</span>
+                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-500 transition-transform duration-300"></i>
                     </button>
-                    <div id="faq-content-3" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed">
+                    <div id="faq-content-3" class="hidden px-5 pb-5 text-sm text-slate-400 leading-relaxed">
                         ¡Totalmente! Utilizamos bolsas de alta barrera libres de BPA aptas para cocción (Sous-Vide) y regeneración térmica. Puedes sumergirlas en agua caliente o microondas con total seguridad.
                     </div>
                 </div>
@@ -276,7 +274,7 @@
     </section>
 
     <!-- Footer -->
-   <footer id="contacto" class="bg-gray-900 text-gray-300 py-12">
+   <footer id="contacto" class="bg-relax-dark text-slate-400 py-12">
     <div class="max-w-[95%] mx-auto px-2 sm:px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             
@@ -288,7 +286,7 @@
                     </div>
                     <span class="text-xl font-bold text-white">GourmetVac</span>
                 </div>
-                <p class="text-sm text-gray-400">Especialistas en la preparación y envasado al vacío de alimentos frescos y congelados. Calidad de restaurante en tu casa.</p>
+                <p class="text-sm">Especialistas en la preparación y envasado al vacío de alimentos frescos y congelados. Calidad de restaurante en tu casa.</p>
             </div>
 
             <!-- Columna 2: Contacto Rápido -->
@@ -313,23 +311,23 @@
             <!-- Columna 3: Horarios y Entrega -->
             <div>
                 <h4 class="text-white font-semibold mb-4 text-base">Horarios de Atención</h4>
-                <p class="text-sm text-gray-400 mb-2"><strong class="text-white">Lunes a Viernes:</strong> 09:00 - 18:00 hs</p>
-                <p class="text-sm text-gray-400 mb-4"><strong class="text-white">Sábados:</strong> 09:00 - 14:00 hs</p>
-                <div class="bg-gray-800 p-3 rounded-lg border border-gray-700">
+                <p class="text-sm mb-2"><strong class="text-white">Lunes a Viernes:</strong> 09:00 - 18:00 hs</p>
+                <p class="text-sm mb-4"><strong class="text-white">Sábados:</strong> 09:00 - 14:00 hs</p>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
                     <span class="text-xs text-emerald-400 font-semibold block">🚚 Entregas Programadas</span>
-                    <span class="text-xs text-gray-300">Envíos refrigerados manteniendo la cadena de frío.</span>
+                    <span class="text-xs">Envíos refrigerados manteniendo la cadena de frío.</span>
                 </div>
             </div>
 
             <!-- Columna 4: Redes Sociales -->
             <div>
                 <h4 class="text-white font-semibold mb-4 text-base">Síguenos</h4>
-                <p class="text-sm text-gray-400 mb-4">Descubre promociones diarias e ideas en nuestras redes.</p>
+                <p class="text-sm mb-4">Descubre promociones diarias e ideas en nuestras redes.</p>
                 <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-emerald-600 rounded-full flex items-center justify-center text-white transition-colors">
+                    <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-emerald-600 rounded-full flex items-center justify-center text-white transition-colors">
                         <i class="fa-brands fa-instagram text-lg"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-emerald-600 rounded-full flex items-center justify-center text-white transition-colors">
+                    <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-emerald-600 rounded-full flex items-center justify-center text-white transition-colors">
                         <i class="fa-brands fa-facebook-f text-lg"></i>
                     </a>
                 </div>
@@ -337,46 +335,46 @@
 
         </div>
 
-        <div class="pt-8 border-t border-gray-800 text-center text-xs text-gray-500">
+        <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
             <p>&copy; 2026 GourmetVac. Todos los derechos reservados. Diseñado para crecimiento emprendedor.</p>
         </div>
     </div>
 </footer>
 
-    <!-- Botón Flotante de WhatsApp (Izquierda) -->
-    <a href="https://wa.me/5491127461954?text=Hola%20GourmetVac!%20Quisiera%20hacer%20una%20consulta." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all transform hover:scale-110 group" aria-label="Contacto por WhatsApp">
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/5491127461954?text=Hola%20GourmetVac!%20Quisiera%20hacer%20una%20consulta." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-all transform hover:scale-110 group" aria-label="Contacto por WhatsApp">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
-        <span class="absolute left-16 bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">
+        <span class="absolute right-16 bg-slate-800 text-white text-xs font-semibold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">
             ¡Escríbenos por WhatsApp!
         </span>
     </a>
 
     <!-- Modal Carrito de Compras -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm flex justify-end transition-opacity opacity-0 pointer-events-none">
-        <div class="bg-white w-full max-w-md h-full flex flex-col justify-between p-6 shadow-2xl transition-transform transform translate-x-full" id="cart-panel">
+    <div id="cart-modal" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm flex justify-end transition-opacity opacity-0 pointer-events-none">
+        <div class="bg-slate-900 border-l border-slate-800 w-full max-w-md h-full flex flex-col justify-between p-6 shadow-2xl transition-transform transform translate-x-full" id="cart-panel">
             <div>
-                <div class="flex justify-between items-center border-b pb-4">
-                    <h3 class="text-xl font-bold text-gray-900 flex items-center space-x-2">
-                        <i class="fa-solid fa-basket-shopping text-emerald-600"></i>
+                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+                    <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-basket-shopping text-emerald-500"></i>
                         <span>Tu Pedido</span>
                     </h3>
-                    <button onclick="toggleCartModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold">
+                    <button onclick="toggleCartModal()" class="text-slate-500 hover:text-white text-xl font-bold">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
 
                 <!-- Lista de Productos en el Carrito -->
-                <div id="cart-items" class="mt-4 space-y-4 max-h-[60vh] overflow-y-auto pr-1">
+                <div id="cart-items" class="mt-4 space-y-4 max-h-[60vh] overflow-y-auto pr-1 hide-scrollbar">
                     <!-- JS Insertará los productos -->
                 </div>
             </div>
 
             <!-- Campo para aplicar Voucher / Cupón -->
-            <div class="border-t border-gray-100 pt-3 pb-1">
-                <label class="block text-xs font-semibold text-gray-700 mb-1">¿Tenés un voucher de descuento?</label>
+            <div class="border-t border-slate-800 pt-3 pb-1 mt-4">
+                <label class="block text-xs font-semibold text-slate-400 mb-1">¿Tenés un voucher de descuento?</label>
                 <div class="flex space-x-2">
-                    <input type="text" id="voucher-input" placeholder="Ej: BIENVENIDA10" class="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm uppercase focus:outline-none focus:border-emerald-600 transition-colors">
-                    <button onclick="applyVoucher()" class="bg-gray-900 hover:bg-emerald-600 text-white font-semibold px-4 py-2 rounded-xl text-xs transition-colors whitespace-nowrap">
+                    <input type="text" id="voucher-input" placeholder="Ej: BIENVENIDA10" class="w-full bg-slate-800 px-3 py-2 border border-slate-700 rounded-xl text-sm text-white uppercase focus:outline-none focus:border-emerald-500 transition-colors placeholder-slate-500">
+                    <button onclick="applyVoucher()" class="bg-slate-800 border border-slate-700 hover:bg-emerald-600 hover:border-emerald-600 text-white font-semibold px-4 py-2 rounded-xl text-xs transition-colors whitespace-nowrap">
                         Aplicar
                     </button>
                 </div>
@@ -384,12 +382,12 @@
             </div>
 
             <!-- Total y Enviar Whatsapp -->
-            <div class="border-t pt-4 space-y-4">
-                <div class="flex justify-between text-lg font-bold text-gray-900">
+            <div class="border-t border-slate-800 pt-4 space-y-4">
+                <div class="flex justify-between text-lg font-bold text-white">
                     <span>Total estimado:</span>
                     <span id="cart-total">$0</span>
                 </div>
-                <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl flex items-center justify-center space-x-2 shadow-lg transition-all">
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl flex items-center justify-center space-x-2 shadow-lg shadow-emerald-900/50 transition-all">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span>Pedir por WhatsApp</span>
                 </button>
@@ -398,9 +396,9 @@
     </div>
 
     <!-- Modal Detalles de Receta -->
-    <div id="recipe-modal" class="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative overflow-hidden shadow-2xl">
-            <button onclick="closeRecipeModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 w-8 h-8 rounded-full flex items-center justify-center">
+    <div id="recipe-modal" class="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 rounded-2xl max-w-lg w-full p-6 relative overflow-hidden shadow-2xl border border-slate-800">
+            <button onclick="closeRecipeModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-slate-300 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div id="recipe-modal-content">
@@ -408,37 +406,52 @@
             </div>
         </div>
     </div>
+
     <!-- Toast / Notificación de Éxito -->
-    <div id="toast-notification" class="fixed bottom-24 right-6 z-50 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
+    <div id="toast-notification" class="fixed bottom-24 right-6 z-50 bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
         <div class="bg-emerald-500 w-8 h-8 rounded-full flex items-center justify-center shadow-inner">
             <i class="fa-solid fa-check text-white"></i>
         </div>
-        <div class="text-sm font-medium pr-2" id="toast-message">
+        <div class="text-sm font-medium pr-2 text-slate-200" id="toast-message">
             ¡Agregado al carrito!
         </div>
     </div>
 
     <!-- Modal Popup de Descuentos Activos -->
-        <div id="discounts-modal" class="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 relative overflow-hidden shadow-2xl border border-emerald-100">
-                <button onclick="closeDiscountsModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
+        <div id="discounts-modal" class="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+            <div class="bg-slate-900 rounded-2xl max-w-md w-full p-6 relative overflow-hidden shadow-2xl border border-slate-800">
+                <button onclick="closeDiscountsModal()" class="absolute top-4 right-4 bg-slate-800 hover:bg-slate-700 text-slate-400 w-8 h-8 rounded-full flex items-center justify-center transition-colors">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-lg font-bold">
+                    <div class="w-10 h-10 bg-slate-800 text-emerald-500 border border-slate-700 rounded-xl flex items-center justify-center text-lg font-bold">
                         <i class="fa-solid fa-percent"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-gray-900">¡Promociones Activas!</h3>
-                        <p class="text-xs text-gray-500">Aprovechá nuestros descuentos por tiempo limitado</p>
+                        <h3 class="text-xl font-bold text-white">¡Promociones Activas!</h3>
+                        <p class="text-xs text-slate-400">Aprovechá nuestros descuentos por tiempo limitado</p>
                     </div>
                 </div>
-                <div id="discounts-modal-content" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1">
+                <div id="discounts-modal-content" class="space-y-3 max-h-[60vh] overflow-y-auto pr-1 hide-scrollbar">
                     <!-- Se llena dinámicamente -->
                 </div>
             </div>
         </div>
-    <!-- Script de lógica de la aplicación -->
+    
+    <!-- Modal Detalles de Producto -->
+    <div id="product-modal" class="fixed inset-0 bg-black/80 z-50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 rounded-3xl max-w-md w-full relative overflow-hidden shadow-2xl border border-slate-700 flex flex-col max-h-[90vh]">
+            <!-- Botón de cerrar flotante sobre la imagen -->
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-black/50 hover:bg-black/80 text-white w-8 h-8 rounded-full flex items-center justify-center transition-colors z-10 backdrop-blur-md">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <!-- Contenedor dinámico -->
+            <div id="product-modal-content" class="overflow-y-auto hide-scrollbar flex flex-col">
+                <!-- El JS inyectará la foto, texto y botón aquí -->
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

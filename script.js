@@ -5,10 +5,7 @@ const LOCAL_IMG_PATH = './imagen/';
 // CENTRALIZACIÓN DE IMÁGENES
 // ==========================================
 const IMAGES = {
-    // Imagen local desde tu carpeta ./imagen/ima1.jpeg
     costillitasB: `${LOCAL_IMG_PATH}ima1.jpeg`,
-
-    // Imágenes de ejemplo (URLs remotas)
     bifeChorizo: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
     lomoFino: 'https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80',
     pechugaPollo: 'https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=800&q=80',
@@ -53,16 +50,53 @@ const TIMED_DISCOUNTS = [
 ];
 
 // Datos del catálogo
+// Datos del catálogo ampliados con descripciones
 const products = [
-    { id: 1, name: 'Bife de Chorizo Madurado', category: 'Carnes', price: 4500, image: IMAGES.bifeChorizo, featured: true },
-    { id: 2, name: 'Lomo Fino Marinado', category: 'Carnes', price: 5200, image: IMAGES.lomoFino, featured: false },
-    { id: 3, name: 'Pechuga de Pollo a las Hierbas', category: 'Aves', price: 2800, image: IMAGES.pechugaPollo, featured: true },
-    { id: 4, name: 'Salmón Noruego Sellado', category: 'Pescados', price: 6800, image: IMAGES.salmonNoruego, featured: true },
-    { id: 5, name: 'Mix de Vegetales Grillados', category: 'Vegetales', price: 1900, image: IMAGES.mixVegetales, featured: false },
-    { id: 6, name: 'Bondiola de Cerdo a la Miel', category: 'Carnes', price: 3900, image: IMAGES.bondiolaCerdo, featured: false },
-    { id: 7, name: 'Espárragos y Zanahorias Baby', category: 'Vegetales', price: 2100, image: IMAGES.esparragos, featured: false },
-    { id: 8, name: 'Costillitas BBQ Sous-Vide', category: 'Platos Listos', price: 4800, image: IMAGES.costillitasBBQ, featured: true },
-    { id: 9, name: 'Costillitas Bordo', category: 'Platos Listos', price: 4800, image: IMAGES.costillitasB, featured: true }
+    { 
+        id: 1, name: 'Bife de Chorizo Madurado', category: 'Carnes', price: 4500, image: IMAGES.bifeChorizo, featured: true,
+        weight: '500g', prep: 'Sartén / Parrilla',
+        description: 'Corte premium de novillo madurado por 21 días. Envasado al vacío en su punto máximo de terneza para garantizar que los jugos naturales y el sabor se mantengan intactos hasta tu mesa.'
+    },
+    { 
+        id: 2, name: 'Lomo Fino Marinado', category: 'Carnes', price: 5200, image: IMAGES.lomoFino, featured: false,
+        weight: '450g', prep: 'Sartén / Horno',
+        description: 'El corte más tierno de todos. Limpio de grasas y membranas, ligeramente marinado con aceite de oliva extra virgen y pimienta negra. Listo para sellar.'
+    },
+    { 
+        id: 3, name: 'Pechuga de Pollo a las Hierbas', category: 'Aves', price: 2800, image: IMAGES.pechugaPollo, featured: true,
+        weight: '400g', prep: 'Agua Caliente / Plancha',
+        description: 'Pechugas de pollo de campo sin piel, marinadas al vacío con tomillo, romero y ajo. Ideales para cocción Sous-Vide o para sellar directamente a la plancha sin que queden secas.'
+    },
+    { 
+        id: 4, name: 'Salmón Noruego Sellado', category: 'Pescados', price: 6800, image: IMAGES.salmonNoruego, featured: true,
+        weight: '250g', prep: 'Agua Caliente (Sous-Vide)',
+        description: 'Penca de salmón rosado de primera calidad, despinado y envasado al vacío. Perfecto para una regeneración rápida y segura manteniendo su textura mantecosa.'
+    },
+    { 
+        id: 5, name: 'Mix de Vegetales Grillados', category: 'Vegetales', price: 1900, image: IMAGES.mixVegetales, featured: false,
+        weight: '400g', prep: 'Microondas / Sartén',
+        description: 'Zucchini, berenjenas, pimientos y cebollas asadas a la plancha y selladas rápidamente para conservar su color y vitaminas. Sin conservantes artificiales.'
+    },
+    { 
+        id: 6, name: 'Bondiola de Cerdo a la Miel', category: 'Carnes', price: 3900, image: IMAGES.bondiolaCerdo, featured: false,
+        weight: '500g', prep: 'Horno / Agua Caliente',
+        description: 'Bondiola deshuesada sometida a una cocción lenta de 6 horas y luego envasada con una reducción de miel y mostaza. Solo calienta y disfruta de una carne que se deshace sola.'
+    },
+    { 
+        id: 7, name: 'Espárragos y Zanahorias Baby', category: 'Vegetales', price: 2100, image: IMAGES.esparragos, featured: false,
+        weight: '300g', prep: 'Microondas / Sartén',
+        description: 'Vegetales crujientes y frescos de huertas locales. Lavados, blanqueados y envasados al vacío para garantizar que no pierdan su textura original.'
+    },
+    { 
+        id: 8, name: 'Costillitas BBQ Sous-Vide', category: 'Platos Listos', price: 4800, image: IMAGES.costillitasBBQ, featured: true,
+        weight: '600g', prep: 'Horno 10 min',
+        description: 'Costillitas de cerdo ahumadas y cocinadas al vacío por 12 horas con salsa barbacoa artesanal. Solo necesitas 10 minutos de horno fuerte para caramelizar la salsa.'
+    },
+    { 
+        id: 9, name: 'Costillitas Bordo', category: 'Platos Listos', price: 4800, image: IMAGES.costillitasB, featured: true,
+        weight: '600g', prep: 'Horno 10 min',
+        description: 'Nuestra especialidad de la casa. Tiernas costillitas bañadas en una salsa especial al vino tinto y especias. Envasadas al vacío para retener todo el aroma.'
+    }
 ];
 
 // Datos de recetas
@@ -126,7 +160,7 @@ function initCarousel() {
     indicatorsContainer.innerHTML = '';
     for (let i = 0; i < totalSlides; i++) {
         const btn = document.createElement('button');
-        btn.className = `w-3 h-3 rounded-full transition-all ${i === 0 ? 'bg-white w-6' : 'bg-white/50'}`;
+        btn.className = `w-3 h-3 rounded-full transition-all ${i === 0 ? 'bg-emerald-500 w-6' : 'bg-white/40'}`;
         btn.onclick = () => goToSlide(i);
         indicatorsContainer.appendChild(btn);
     }
@@ -144,7 +178,7 @@ function updateCarousel() {
 
     if (indicators) {
         Array.from(indicators).forEach((ind, index) => {
-            ind.className = index === currentSlide ? 'w-6 h-3 bg-white rounded-full transition-all' : 'w-3 h-3 bg-white/50 rounded-full transition-all';
+            ind.className = index === currentSlide ? 'w-6 h-3 bg-emerald-500 rounded-full transition-all' : 'w-3 h-3 bg-white/40 rounded-full transition-all';
         });
     }
 }
@@ -168,12 +202,12 @@ function goToSlide(index) {
     updateCarousel();
 }
 
-// Redondeo obligatorio a múltiplo de 10 hacia arriba (sin decimales)
+// Redondeo obligatorio a múltiplo de 10 hacia arriba
 function roundUpToTen(amount) {
     return Math.ceil(amount / 10) * 10;
 }
 
-// Lógica de cálculo de precios con ofertas activas por fecha
+// Lógica de cálculo de precios con ofertas
 function getProductEffectivePrice(product) {
     const now = new Date();
     let maxDiscount = 0;
@@ -211,7 +245,7 @@ function getProductEffectivePrice(product) {
     };
 }
 
-// Renderizado de Categorías
+// Renderizado de Categorías (Adaptado a Modo Noche)
 function renderCategories() {
     const container = document.getElementById('category-buttons');
     if (!container) return;
@@ -219,7 +253,7 @@ function renderCategories() {
     const categories = ['Todos', ...new Set(products.map(p => p.category))];
     
     container.innerHTML = categories.map(cat => `
-        <button onclick="filterCategory('${cat}')" class="px-6 py-2.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${selectedCategory === cat ? 'bg-fresh-600 text-white shadow-lg shadow-fresh-500/20' : 'bg-white text-slate-500 hover:text-slate-800 hover:bg-slate-100/80 border border-slate-200/60'}">
+        <button onclick="filterCategory('${cat}')" class="px-6 py-2.5 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap border ${selectedCategory === cat ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-900/40' : 'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 border-slate-700'}">
             ${cat}
         </button>
     `).join('');
@@ -231,7 +265,7 @@ function filterCategory(cat) {
     renderProducts();
 }
 
-// Renderizado de Productos del Catálogo
+// Renderizado de Productos 
 function renderProducts() {
     const container = document.getElementById('product-grid');
     if (!container) return;
@@ -246,38 +280,45 @@ function renderProducts() {
         const priceData = getProductEffectivePrice(product);
 
         return `
-            <div class="bg-white rounded-3xl overflow-hidden shadow-soft-fresh hover:shadow-card-float hover:-translate-y-1 transition-all duration-300 border border-emerald-950/5 flex flex-col justify-between group">
+            <div class="bg-slate-800 rounded-3xl overflow-hidden shadow-md border border-slate-700 hover:shadow-xl hover:shadow-emerald-900/10 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
                 
-                <div class="relative overflow-hidden h-64 sm:h-72 bg-slate-50">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                <!-- Imagen clickeable -->
+                <div class="relative overflow-hidden h-64 sm:h-72 bg-slate-900 cursor-pointer" onclick="openProductModal(${product.id})">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
                     
-                    <span class="absolute top-3.5 right-3.5 bg-white/90 backdrop-blur-md text-[11px] font-semibold tracking-wide px-3 py-1 rounded-full text-slate-700 shadow-sm border border-white/50">
+                    <span class="absolute top-3.5 right-3.5 bg-slate-900/90 backdrop-blur-md text-[11px] font-semibold tracking-wide px-3 py-1 rounded-full text-slate-300 shadow-sm border border-slate-700">
                         ${product.category}
                     </span>
 
                     ${priceData.hasDiscount ? `
-                        <span class="absolute top-3.5 left-3.5 bg-fresh-600 text-white text-[11px] font-bold tracking-wider px-2.5 py-1 rounded-full shadow-md backdrop-blur-sm">
+                        <span class="absolute top-3.5 left-3.5 bg-emerald-600 text-white text-[11px] font-bold tracking-wider px-2.5 py-1 rounded-full shadow-md backdrop-blur-sm">
                             -${priceData.discountPercent}% OFF
                         </span>
                     ` : ''}
+                    
+                    <!-- Capa hover "Ver detalle" -->
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-slate-900/80 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full border border-slate-700"><i class="fa-regular fa-eye mr-2"></i>Ver detalle</span>
+                    </div>
                 </div>
 
-                <div class="p-5 flex flex-col flex-grow justify-between bg-white">
+                <div class="p-5 flex flex-col flex-grow justify-between bg-slate-800">
                     <div>
-                        <span class="text-[10px] font-bold text-fresh-600 uppercase tracking-widest block mb-1">100% Empacado al Vacío</span>
-                        <h3 class="font-bold text-slate-800 text-base leading-snug group-hover:text-fresh-600 transition-colors line-clamp-1">${product.name}</h3>
+                        <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest block mb-1">100% Empacado al Vacío</span>
+                        <!-- Título clickeable -->
+                        <h3 class="font-bold text-slate-200 text-base leading-snug hover:text-emerald-400 transition-colors line-clamp-1 cursor-pointer" onclick="openProductModal(${product.id})">${product.name}</h3>
                     </div>
 
-                    <div class="mt-4 flex items-center justify-between pt-3 border-t border-slate-100">
+                    <div class="mt-4 flex items-center justify-between pt-3 border-t border-slate-700">
                         <div>
                             ${priceData.hasDiscount ? `
-                                <span class="text-xs text-slate-400 line-through block font-medium">$${priceData.originalPrice.toLocaleString()}</span>                                 <span class="text-lg font-extrabold text-fresh-700">$${priceData.finalPrice.toLocaleString()}</span>
+                                <span class="text-xs text-slate-500 line-through block font-medium">$${priceData.originalPrice.toLocaleString()}</span>                                 <span class="text-lg font-extrabold text-emerald-400">$${priceData.finalPrice.toLocaleString()}</span>
                             ` : `
-                                <span class="text-lg font-extrabold text-slate-800">$${priceData.finalPrice.toLocaleString()}</span>
+                                <span class="text-lg font-extrabold text-white">$${priceData.finalPrice.toLocaleString()}</span>
                             `}
                         </div>
 
-                        <button onclick="addToCart(${product.id})" class="bg-fresh-50 hover:bg-fresh-600 text-fresh-700 hover:text-white p-3 rounded-2xl transition-all shadow-sm active:scale-95 border border-fresh-100 flex items-center justify-center">
+                        <button onclick="addToCart(${product.id})" class="bg-slate-700 hover:bg-emerald-600 text-emerald-400 hover:text-white p-3 rounded-2xl transition-all shadow-sm active:scale-95 border border-slate-600 hover:border-emerald-500 flex items-center justify-center">
                             <i class="fa-solid fa-cart-plus text-base"></i>
                         </button>
                     </div>
@@ -300,30 +341,36 @@ function renderFeatured() {
         const priceData = getProductEffectivePrice(product);
 
         return `
-            <div class="bg-white rounded-2xl overflow-hidden border border-emerald-100 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col sm:flex-row h-full">
-                <div class="sm:w-1/2 h-56 sm:h-auto relative overflow-hidden bg-gray-100">
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <div class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 shadow-md hover:shadow-lg hover:border-slate-600 transition-all duration-300 flex flex-col sm:flex-row h-full group">
+                <!-- Imagen clickeable -->
+                <div class="sm:w-1/2 h-56 sm:h-auto relative overflow-hidden bg-slate-900 cursor-pointer" onclick="openProductModal(${product.id})">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
                     ${priceData.hasDiscount ? `
-                        <span class="absolute top-2 left-2 bg-fresh-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-sm">
+                        <span class="absolute top-2 left-2 bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-sm">
                             -${priceData.discountPercent}% OFF
                         </span>
                     ` : ''}
+                    <!-- Capa hover "Ver detalle" -->
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-regular fa-eye text-white text-2xl drop-shadow-lg"></i>
+                    </div>
                 </div>
                 <div class="p-5 flex flex-col justify-between sm:w-1/2">
                     <div>
-                        <span class="inline-block text-[10px] uppercase font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md mb-2">Popular</span>
-                        <h3 class="font-bold text-gray-900 text-base leading-snug">${product.name}</h3>
-                        <p class="text-xs text-gray-500 mt-1">Frescura garantizada de 15 a 30 días.</p>
+                        <span class="inline-block text-[10px] uppercase font-bold text-emerald-400 bg-slate-900 border border-slate-700 px-2.5 py-1 rounded-md mb-2">Popular</span>
+                        <!-- Título clickeable -->
+                        <h3 class="font-bold text-white text-base leading-snug cursor-pointer hover:text-emerald-400 transition-colors" onclick="openProductModal(${product.id})">${product.name}</h3>
+                        <p class="text-xs text-slate-400 mt-1">Frescura garantizada de 15 a 30 días.</p>
                     </div>
-                    <div class="mt-4 flex items-center justify-between pt-3 border-t border-gray-50">
+                    <div class="mt-4 flex items-center justify-between pt-3 border-t border-slate-700">
                         <div>
                             ${priceData.hasDiscount ? `
-                                <span class="text-xs text-gray-400 line-through block font-medium">$${priceData.originalPrice.toLocaleString()}</span>                                 <span class="text-lg font-extrabold text-fresh-700">$${priceData.finalPrice.toLocaleString()}</span>
+                                <span class="text-xs text-slate-500 line-through block font-medium">$${priceData.originalPrice.toLocaleString()}</span>                                 <span class="text-lg font-extrabold text-emerald-400">$${priceData.finalPrice.toLocaleString()}</span>
                             ` : `
-                                <span class="text-lg font-extrabold text-gray-900">$${priceData.finalPrice.toLocaleString()}</span>
+                                <span class="text-lg font-extrabold text-white">$${priceData.finalPrice.toLocaleString()}</span>
                             `}
                         </div>
-                        <button onclick="addToCart(${product.id})" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-md transition-all active:scale-95">
+                        <button onclick="addToCart(${product.id})" class="bg-slate-700 border border-slate-600 hover:bg-emerald-600 hover:border-emerald-500 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-md transition-all active:scale-95">
                             Agregar
                         </button>
                     </div>
@@ -333,22 +380,22 @@ function renderFeatured() {
     }).join('');
 }
 
-// Renderizado de Recetas
+// Renderizado de Recetas (Adaptado a Modo Noche)
 function renderRecipes() {
     const container = document.getElementById('recipe-grid');
     if (!container) return;
 
     container.innerHTML = recipes.map((recipe, index) => `
-        <div class="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 hover:shadow-md transition-all flex flex-col">
-            <div class="h-52 overflow-hidden">
-                <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-full object-cover">
+        <div class="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:shadow-lg transition-all flex flex-col group">
+            <div class="h-52 overflow-hidden bg-slate-900">
+                <img src="${recipe.image}" alt="${recipe.title}" loading="lazy" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
             </div>
             <div class="p-6 flex flex-col flex-grow justify-between">
                 <div>
-                    <h3 class="font-bold text-gray-900 text-lg">${recipe.title}</h3>
-                    <p class="text-gray-600 text-sm mt-2">${recipe.desc}</p>
+                    <h3 class="font-bold text-white text-lg">${recipe.title}</h3>
+                    <p class="text-slate-400 text-sm mt-2">${recipe.desc}</p>
                 </div>
-                <button onclick="openRecipeModal(${index})" class="mt-4 text-emerald-600 font-semibold text-sm hover:text-emerald-700 inline-flex items-center space-x-1">
+                <button onclick="openRecipeModal(${index})" class="mt-4 text-emerald-500 font-semibold text-sm hover:text-emerald-400 inline-flex items-center space-x-1">
                     <span>Leer consejos</span>
                     <i class="fa-solid fa-chevron-right text-xs"></i>
                 </button>
@@ -365,9 +412,9 @@ function openRecipeModal(index) {
     if (!modal || !content || !recipe) return;
 
     content.innerHTML = `
-        <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-48 object-cover rounded-xl mb-4">
-        <h3 class="text-xl font-bold text-gray-900 mb-2">${recipe.title}</h3>
-        <p class="text-gray-600 text-sm leading-relaxed">${recipe.detail}</p>
+        <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-48 object-cover rounded-xl mb-4 opacity-90">
+        <h3 class="text-xl font-bold text-white mb-2">${recipe.title}</h3>
+        <p class="text-slate-300 text-sm leading-relaxed">${recipe.detail}</p>
     `;
     modal.classList.remove('hidden');
 }
@@ -441,11 +488,11 @@ function applyVoucher() {
 
     if (VOUCHERS[code]) {
         appliedVoucher = { code, ...VOUCHERS[code] };
-        msg.className = "text-xs mt-1 font-semibold text-emerald-600 block";
+        msg.className = "text-xs mt-1 font-semibold text-emerald-500 block";
         msg.innerText = `¡Voucher "${code}" aplicado! (Aplica solo a productos sin oferta)`;
     } else {
         appliedVoucher = null;
-        msg.className = "text-xs mt-1 font-semibold text-red-500 block";
+        msg.className = "text-xs mt-1 font-semibold text-red-400 block";
         msg.innerText = "Voucher inválido o expirado.";
     }
     updateCartUI();
@@ -480,7 +527,7 @@ function updateCartUI() {
     }
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = '<p class="text-gray-400 text-center py-8 text-sm">Tu carrito está vacío.</p>';
+        cartContainer.innerHTML = '<p class="text-slate-500 text-center py-8 text-sm">Tu carrito está vacío.</p>';
         appliedVoucher = null;
         const msg = document.getElementById('voucher-message');
         if (msg) msg.classList.add('hidden');
@@ -491,18 +538,18 @@ function updateCartUI() {
             const priceData = getProductEffectivePrice(item);
 
             return `
-                <div class="flex items-center justify-between border-b pb-3">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                     <div class="flex items-center space-x-3">
-                        <img src="${item.image}" class="w-12 h-12 object-cover rounded-lg">
+                        <img src="${item.image}" class="w-12 h-12 object-cover rounded-lg border border-slate-700">
                         <div>
-                            <h4 class="font-bold text-sm text-gray-800">${item.name}</h4>
-                            <span class="text-xs text-gray-500">$${priceData.finalPrice.toLocaleString()} c/u</span>
+                            <h4 class="font-bold text-sm text-white">${item.name}</h4>
+                            <span class="text-xs text-slate-400">$${priceData.finalPrice.toLocaleString()} c/u</span>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <button onclick="updateCartQuantity(${item.id}, -1)" class="w-6 h-6 bg-gray-100 rounded hover:bg-gray-200 flex items-center justify-center font-bold text-xs text-gray-600">-</button>
-                        <span class="text-sm font-semibold">${item.quantity}</span>
-                        <button onclick="updateCartQuantity(${item.id}, 1)" class="w-6 h-6 bg-gray-100 rounded hover:bg-gray-200 flex items-center justify-center font-bold text-xs text-gray-600">+</button>
+                        <button onclick="updateCartQuantity(${item.id}, -1)" class="w-7 h-7 bg-slate-800 border border-slate-700 rounded-md hover:bg-slate-700 flex items-center justify-center font-bold text-sm text-slate-300 transition-colors">-</button>
+                        <span class="text-sm font-semibold text-white w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateCartQuantity(${item.id}, 1)" class="w-7 h-7 bg-slate-800 border border-slate-700 rounded-md hover:bg-slate-700 flex items-center justify-center font-bold text-sm text-slate-300 transition-colors">+</button>
                     </div>
                 </div>
             `;
@@ -524,16 +571,16 @@ function updateCartUI() {
     if (discountAmount > 0) {
         totalElement.innerHTML = `
             <div class="text-right">
-                <span class="text-xs text-gray-400 line-through block font-normal">Subtotal: $${subtotal.toLocaleString()}</span>
-                <span class="text-xs text-emerald-600 block font-semibold">- $${discountAmount.toLocaleString()} (${appliedVoucher.label})</span>
-                <span class="text-xl font-extrabold text-gray-900">$${finalTotal.toLocaleString()}</span>
+                <span class="text-xs text-slate-500 line-through block font-normal">Subtotal: $${subtotal.toLocaleString()}</span>
+                <span class="text-xs text-emerald-500 block font-semibold">- $${discountAmount.toLocaleString()} (${appliedVoucher.label})</span>
+                <span class="text-xl font-extrabold text-white">$${finalTotal.toLocaleString()}</span>
             </div>
         `;
     } else if (appliedVoucher && eligibleSubtotalForVoucher === 0 && cart.length > 0) {
         totalElement.innerHTML = `
             <div class="text-right">
-                <span class="text-xs text-amber-600 block font-medium">El voucher no aplica: los productos ya tienen descuento.</span>
-                <span class="text-xl font-extrabold text-gray-900">$${subtotal.toLocaleString()}</span>
+                <span class="text-xs text-amber-500 block font-medium">El voucher no aplica: los productos ya tienen descuento.</span>
+                <span class="text-xl font-extrabold text-white">$${subtotal.toLocaleString()}</span>
             </div>
         `;
     } else {
@@ -541,7 +588,7 @@ function updateCartUI() {
     }
 }
 
-// Envío a WhatsApp con Precios Redondeados
+// Envío a WhatsApp
 function sendWhatsAppOrder() {
     if (cart.length === 0) {
         alert('El carrito está vacío');
@@ -608,15 +655,15 @@ function checkAndShowDiscountsPopup() {
     if (!modal || !container) return;
 
     container.innerHTML = activePromos.map(promo => `
-        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl">
+        <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl">
             <div class="flex items-center justify-between mb-1">
-                <span class="font-bold text-emerald-900 text-sm">${promo.title}</span>
-                <span class="bg-emerald-600 text-white font-extrabold text-xs px-2 py-0.5 rounded-md">
+                <span class="font-bold text-emerald-400 text-sm">${promo.title}</span>
+                <span class="bg-emerald-600 text-white font-extrabold text-xs px-2 py-0.5 rounded-md shadow-sm">
                     -${promo.discountPercent}% OFF
                 </span>
             </div>
-            <p class="text-xs text-emerald-700 mb-2">${promo.description}</p>
-            <div class="text-[10px] text-emerald-800 font-semibold flex items-center space-x-1">
+            <p class="text-xs text-slate-300 mb-2">${promo.description}</p>
+            <div class="text-[10px] text-slate-500 font-semibold flex items-center space-x-1">
                 <i class="fa-regular fa-clock"></i>
                 <span>Válido hasta: ${new Date(promo.endDate).toLocaleDateString()}</span>
             </div>
@@ -645,4 +692,74 @@ function showToast(message) {
     toastTimeout = setTimeout(() => {
         toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
     }, 2500);
+}
+// ==========================================
+// LÓGICA DEL MODAL DE PRODUCTO
+// ==========================================
+function openProductModal(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+
+    const modal = document.getElementById('product-modal');
+    const content = document.getElementById('product-modal-content');
+    const priceData = getProductEffectivePrice(product);
+
+    // Construimos el interior del modal dinámicamente
+    content.innerHTML = `
+        <div class="relative h-64 sm:h-72 shrink-0">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+            ${priceData.hasDiscount ? `
+                <span class="absolute top-4 left-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                    -${priceData.discountPercent}% OFF
+                </span>
+            ` : ''}
+        </div>
+        
+        <div class="p-6 flex flex-col gap-4">
+            <div>
+                <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">${product.category}</span>
+                <h3 class="text-xl font-bold text-white mt-1 leading-tight">${product.name}</h3>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed">${product.description}</p>
+
+            <div class="flex items-center space-x-4 py-3 border-y border-slate-700/50">
+                <div class="flex items-center space-x-2 text-slate-400 text-sm">
+                    <i class="fa-solid fa-scale-balanced text-emerald-500"></i>
+                    <span>${product.weight}</span>
+                </div>
+                <div class="flex items-center space-x-2 text-slate-400 text-sm">
+                    <i class="fa-solid fa-fire-burner text-emerald-500"></i>
+                    <span>${product.prep}</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-2">
+                <div>
+                    ${priceData.hasDiscount ? `
+                        <span class="text-xs text-slate-500 line-through block font-medium">$${priceData.originalPrice.toLocaleString()}</span>                         <span class="text-2xl font-extrabold text-emerald-400">$${priceData.finalPrice.toLocaleString()}</span>
+                    ` : `
+                        <span class="text-2xl font-extrabold text-white">$${priceData.finalPrice.toLocaleString()}</span>
+                    `}
+                </div>
+                <button onclick="addToCartAndCloseModal(${product.id})" class="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-lg shadow-emerald-900/50 transition-all active:scale-95 flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <span>Agregar</span>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    modal.classList.remove('hidden');
+}
+
+function closeProductModal() {
+    const modal = document.getElementById('product-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+// Agrega al carrito y cierra el modal para seguir comprando
+function addToCartAndCloseModal(id) {
+    addToCart(id);
+    closeProductModal();
 }
