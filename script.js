@@ -139,7 +139,7 @@ function checkBusinessHours() {
     let isOpen = false;
 
     if (day >= 1 && day <= 5) {
-        // Lunes a Viernes: 12 a 18 hs
+        // Lunes a Viernes: 09 a 18 hs
         if (hour >= 9 && hour < 18) isOpen = true;
     } else if (day === 6) {
         // Sábados: 9 a 15 hs
@@ -721,7 +721,7 @@ function sendWhatsAppOrder() {
 
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n`;
     message += `📅 *Fecha:* ${day}/${month}/${shortYear}\n\n`;
-    message += "Hola GourmetVac! Quisiera realizar el siguiente pedido:\n\n";
+    message += "Hola NIFU-NIFA! Quisiera realizar el siguiente pedido:\n\n";
 
     let subtotal = 0;
     let eligibleSubtotalForVoucher = 0;
