@@ -129,57 +129,49 @@ let carouselInterval = null;
 let toastTimeout;
 
 // ==========================================
-// CONFIGURACIÓN DE HORARIOS DE ATENCIÓN
+// CONTROL DE HORARIOS DE ATENCIÓN
 // ==========================================
-const SCHEDULE = {
-    openHour: 9,        // 09:00 AM - Abren
-    sameDayCutoff: 13,  // 13:00 PM (1 PM) - Límite para entregar HOY
-    closeHour: 21       // 21:00 PM (9 PM) - Dejan de responder
-};
-
-function getDeliveryStatus() {
+function checkBusinessHours() {
     const now = new Date();
+    const day = now.getDay(); // 0 = Domingo, 1 = Lunes, ..., 6 = Sábado
     const hour = now.getHours();
-    
-    // Entre las 00:00 y las 09:00 (Cerrado, pedido para el día o mañana)
-    if (hour < SCHEDULE.openHour) {
-        return {
-            title: "Cerrado momentáneamente 🌙",
-            desc: "Dejá tu pedido ahora y te contactamos a las 09:00 hs para coordinar la entrega.",
-            label: "Para coordinar hoy a primera hora",
-            iconColor: "text-amber-500",
-            boxBg: "bg-amber-900/20 border-amber-700/50"
-        };
-    } 
-    // Entre las 09:00 y el límite del mediodía (13:00) -> Entrega HOY
-    else if (hour < SCHEDULE.sameDayCutoff) {
-        return {
-            title: "¡Llegás a tiempo! ⚡",
-            desc: "Si hacés el pedido ahora, podemos entregarlo en el transcurso del DÍA DE HOY.",
-            label: "Entrega para HOY",
-            iconColor: "text-emerald-400",
-            boxBg: "bg-emerald-900/20 border-emerald-700/50"
-        };
-    } 
-    // Entre el mediodía (13:00) y la hora de cierre (21:00) -> Entrega MAÑANA
-    else if (hour < SCHEDULE.closeHour) {
-        return {
-            title: "Entrega para MAÑANA 📅",
-            desc: "El horario de envíos de hoy cerró. Tomamos tu pedido para entregarlo mañana.",
-            label: "Entrega programada para MAÑANA",
-            iconColor: "text-blue-400",
-            boxBg: "bg-blue-900/20 border-blue-700/50"
-        };
-    } 
-    // Después de las 21:00 hs (Cerrado hasta el otro día)
-    else {
-        return {
-            title: "Fuera de horario comercial 🌙",
-            desc: "Podés dejar tu pedido listo. Mañana después de las 09:00 hs te confirmamos el envío.",
-            label: "Pedido nocturno (Para coordinar mañana)",
-            iconColor: "text-slate-400",
-            boxBg: "bg-slate-800 border-slate-700"
-        };
+
+    let isOpen = false;
+
+    if (day >= 1 && day <= 5) {
+        // Lunes a Viernes: 9 a 18 hs
+        if (hour >= 9 && hour < 18) isOpen = true;
+    } else if (day === 6) {
+        // Sábados: 9 a 15 hs
+        if (hour >= 9 && hour < 15) isOpen = true;
+    }
+    // Domingos (day === 0) isOpen ya es false
+
+    // Si NO está abierto, mostramos el modal
+    if (!isOpen) {
+        const modal = document.getElementById('closed-modal');
+        const panel = document.getElementById('closed-modal-panel');
+        if (modal && panel) {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                panel.classList.remove('scale-95');
+                panel.classList.add('scale-100');
+            }, 10);
+        }
+    }
+}
+
+function closeStoreModal() {
+    const modal = document.getElementById('closed-modal');
+    const panel = document.getElementById('closed-modal-panel');
+    if (modal && panel) {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.remove('scale-100');
+        panel.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
     }
 }
 
@@ -196,6 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFeatured();
     renderRecipes();
     checkAndShowDiscountsPopup();
+
+    // Revisar si estamos cerrados 1 segundo después de cargar la web
+    setTimeout(checkBusinessHours, 1000); 
 });
 
 // Menú móvil
@@ -656,24 +651,6 @@ function updateCartUI() {
     } else {
         totalElement.innerText = `$${subtotal.toLocaleString()}`;
     }
-    // Actualizar dinámicamente el bloque de horarios
-    const deliveryBox = document.getElementById('delivery-info-box');
-    const deliveryIcon = document.getElementById('delivery-icon');
-    const deliveryTitle = document.getElementById('delivery-title');
-    const deliveryDesc = document.getElementById('delivery-desc');
-    
-    if (deliveryBox && cart.length > 0) {
-        const status = getDeliveryStatus();
-        deliveryTitle.innerText = status.title;
-        deliveryDesc.innerText = status.desc;
-        
-        // Actualizar colores
-        deliveryIcon.className = `fa-regular fa-clock mt-0.5 text-lg ${status.iconColor}`;
-        deliveryBox.className = `mt-4 mb-4 p-3 rounded-xl border flex items-start space-x-3 transition-colors ${status.boxBg}`;
-        deliveryBox.classList.remove('hidden');
-    } else if (deliveryBox) {
-        deliveryBox.classList.add('hidden');
-    }
 }
 
 // Envío a WhatsApp y Google Sheets
@@ -744,8 +721,7 @@ function sendWhatsAppOrder() {
     const status = getDeliveryStatus(); 
 
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n`;
-    message += `📅 *Fecha:* ${day}/${month}/${shortYear}\n`;
-    message += `⏱️ *Disponibilidad:* ${status.label}\n\n`;
+    message += `📅 *Fecha:* ${day}/${month}/${shortYear}\n\n`;
     message += "Hola GourmetVac! Quisiera realizar el siguiente pedido:\n\n";
 
     let subtotal = 0;

@@ -492,6 +492,28 @@
             </button>
         </div>
     </div>
+    <!-- Modal de Local Cerrado -->
+    <div id="closed-modal" class="fixed inset-0 bg-black/80 z-[75] backdrop-blur-sm flex items-center justify-center p-4 transition-all duration-300 opacity-0 pointer-events-none hidden">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl transform scale-95 transition-transform duration-300" id="closed-modal-panel">
+            <div class="w-16 h-16 bg-slate-800 text-amber-500 border border-slate-700 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl shadow-inner">
+                <i class="fa-solid fa-store-slash"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Fuera de Horario Comercial</h3>
+            <p class="text-sm text-slate-300 mb-4 leading-relaxed">Nuestro local se encuentra cerrado en este momento. Puede dejar su pedido preparado en el sistema y lo procesaremos apenas abramos nuestras puertas.</p>
+            <div class="bg-slate-800 p-4 rounded-xl text-left border border-slate-700 mb-6">
+                <p class="text-xs font-semibold text-emerald-400 uppercase tracking-widest mb-2 border-b border-slate-700 pb-1">Nuestros Horarios</p>
+                <ul class="text-sm text-slate-300 space-y-1">
+                    <li><span class="font-bold text-white">Lunes a Viernes:</span> 09:00 a 18:00 hs</li>
+                    <li><span class="font-bold text-white">Sábados:</span> 09:00 a 15:00 hs</li>
+                    <li><span class="font-bold text-white">Domingos:</span> Cerrado</li>
+                </ul>
+                <p class="text-xs text-slate-400 mt-3 pt-2 border-t border-slate-700"><i class="fa-solid fa-truck-fast text-emerald-500 mr-1"></i> Envíos: 10:00 a 18:00 hs</p>
+            </div>
+            <button onclick="closeStoreModal()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-emerald-900/50 transition-all active:scale-95">
+                Entendido, armaré mi pedido
+            </button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
