@@ -663,6 +663,7 @@ function updateCartUI() {
 
 // Envío a WhatsApp y Google Sheets
 
+// Envío a WhatsApp y Google Sheets
 function sendWhatsAppOrder() {
     if (cart.length === 0) {
         alert('El carrito está vacío');
@@ -674,7 +675,7 @@ function sendWhatsAppOrder() {
     const customerPhone = phoneInput ? phoneInput.value.trim() : '';
 
     if (!customerPhone) {
-        alert('Por favor, ingresá tu número de WhatsApp.');
+        alert('Por favor, ingresá tu número de WhatsApp para el registro.');
         return;
     }
 
@@ -731,7 +732,7 @@ function sendWhatsAppOrder() {
     formData.append('telefono', customerPhone);
 
     // URL de tu Google Apps Script
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbydE_Fi-wvEqMfxlai6PpOOMxuAbFvScdyzI4nsHcycdRboaQJFpPjB2y_EbWWElgGzAQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwTmQ4R8zdfN_gJHAA9hB02sRQLbSssH5mRBmxS8XcWPfHGqGd_P9lTLEooPJYnk1qlLg/exec';
     
     // Enviar a Google Sheets
     fetch(scriptURL, {
@@ -752,9 +753,16 @@ function sendWhatsAppOrder() {
     // 3. Volvemos al inicio de la página suavemente
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // 4. Abrimos WhatsApp en la misma pestaña (evita la página en blanco)
+    // 4. Abrir WhatsApp usando la API directa (evita la pestaña en blanco)
     const encodedMessage = encodeURIComponent(message);
-    window.location.href = `https://wa.me/5491127461954?text=${encodedMessage}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=5491127461954&text=${encodedMessage}`;
+    
+    const link = document.createElement('a');
+    link.href = whatsappUrl;
+    link.target = '_self'; // Fuerza a que se abra en la misma ventana
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // ==========================================
