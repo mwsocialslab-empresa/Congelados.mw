@@ -887,3 +887,40 @@ function addToCartAndCloseModal(id) {
     addToCart(id);
     closeProductModal();
 }
+
+// Funciones para el Popup Personalizado
+function showCustomAlert(title, message) {
+    const modal = document.getElementById('custom-alert');
+    const titleEl = document.getElementById('custom-alert-title');
+    const msgEl = document.getElementById('custom-alert-message');
+    const panel = document.getElementById('custom-alert-panel');
+    
+    if (modal && titleEl && msgEl && panel) {
+        titleEl.innerText = title;
+        msgEl.innerText = message;
+        
+        modal.classList.remove('hidden');
+        // Pequeño delay para la animación CSS
+        setTimeout(() => {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+        }, 10);
+    } else {
+        alert(message); // Respaldo por las dudas
+    }
+}
+
+function closeCustomAlert() {
+    const modal = document.getElementById('custom-alert');
+    const panel = document.getElementById('custom-alert-panel');
+    
+    if (modal && panel) {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.remove('scale-100');
+        panel.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+}
