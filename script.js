@@ -664,18 +664,59 @@ function updateCartUI() {
 // Envío a WhatsApp y Google Sheets
 
 // Envío a WhatsApp y Google Sheets
+// ==========================================
+// POPUP DE ALERTA PERSONALIZADO
+// ==========================================
+function showCustomAlert(title, message) {
+    const modal = document.getElementById('custom-alert');
+    const titleEl = document.getElementById('custom-alert-title');
+    const msgEl = document.getElementById('custom-alert-message');
+    const panel = document.getElementById('custom-alert-panel');
+    
+    if (modal && titleEl && msgEl && panel) {
+        titleEl.innerText = title;
+        msgEl.innerText = message;
+        
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            panel.classList.remove('scale-95');
+            panel.classList.add('scale-100');
+        }, 10);
+    } else {
+        // Si por algún motivo no encuentra el HTML, mostramos el cartel nativo
+        alert(title + ": " + message); 
+    }
+}
+
+function closeCustomAlert() {
+    const modal = document.getElementById('custom-alert');
+    const panel = document.getElementById('custom-alert-panel');
+    
+    if (modal && panel) {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.remove('scale-100');
+        panel.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+}
+
+// ==========================================
+// ENVÍO A WHATSAPP Y GOOGLE SHEETS
+// ==========================================
 function sendWhatsAppOrder() {
     if (cart.length === 0) {
-        alert('El carrito está vacío');
+        showCustomAlert('Carrito Vacío', 'Agregá al menos un producto para hacer el pedido.');
         return;
     }
 
-    // Obtener el teléfono del cliente
     const phoneInput = document.getElementById('customer-phone');
     const customerPhone = phoneInput ? phoneInput.value.trim() : '';
 
     if (!customerPhone) {
-        alert('Por favor, ingresá tu número de WhatsApp para el registro.');
+        showCustomAlert('Falta tu Teléfono', 'Por favor, ingresá tu número de WhatsApp para el registro.');
         return;
     }
 
@@ -684,12 +725,9 @@ function sendWhatsAppOrder() {
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
     const shortYear = now.getFullYear().toString().slice(-2);
 
-    // Solo dejamos los 4 números aleatorios como número de pedido
     const orderNumber = Math.floor(1000 + Math.random() * 9000).toString();
-
     const status = getDeliveryStatus(); 
 
-    // Mensaje formateado como pediste
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n`;
     message += `📅 *Fecha:* ${day}/${month}/${shortYear}\n`;
     message += `⏱️ *Disponibilidad:* ${status.label}\n\n`;
@@ -726,40 +764,33 @@ function sendWhatsAppOrder() {
     const total = roundUpToTen(Math.max(0, subtotal - discountAmount));
     message += `\n*Total Estimado:* $${total.toLocaleString()}\n\n`;
     
-    // Preparar los datos en formato URLSearchParams
     const formData = new URLSearchParams();
     formData.append('pedido', orderNumber);
     formData.append('telefono', customerPhone);
 
-    // URL de tu Google Apps Script
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwTmQ4R8zdfN_gJHAA9hB02sRQLbSssH5mRBmxS8XcWPfHGqGd_P9lTLEooPJYnk1qlLg/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbydE_Fi-wvEqMfxlai6PpOOMxuAbFvScdyzI4nsHcycdRboaQJFpPjB2y_EbWWElgGzAQ/exec';
     
-    // Enviar a Google Sheets
     fetch(scriptURL, {
         method: 'POST',
         mode: 'no-cors',
         body: formData
     }).catch(error => console.error('Error al guardar:', error));
 
-    // 1. Cerramos el modal del carrito
     toggleCartModal();
 
-    // 2. Vaciamos el carrito y limpiamos los datos
     cart = [];
     if (phoneInput) phoneInput.value = '';
     appliedVoucher = null;
     updateCartUI();
 
-    // 3. Volvemos al inicio de la página suavemente
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // 4. Abrir WhatsApp usando la API directa (evita la pestaña en blanco)
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://api.whatsapp.com/send?phone=5491127461954&text=${encodedMessage}`;
     
     const link = document.createElement('a');
     link.href = whatsappUrl;
-    link.target = '_self'; // Fuerza a que se abra en la misma ventana
+    link.target = '_self';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
