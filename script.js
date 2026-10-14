@@ -682,12 +682,14 @@ function sendWhatsAppOrder() {
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
     const shortYear = now.getFullYear().toString().slice(-2);
 
-    const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    const orderNumber = `GV-${day}/${month}/${shortYear}-${randomDigits}`;
+    // Solo dejamos los 4 números aleatorios como número de pedido
+    const orderNumber = Math.floor(1000 + Math.random() * 9000).toString();
 
     const status = getDeliveryStatus(); 
 
+    // Mensaje formateado como pediste
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n`;
+    message += `📅 *Fecha:* ${day}/${month}/${shortYear}\n`;
     message += `⏱️ *Disponibilidad:* ${status.label}\n\n`;
     message += "Hola GourmetVac! Quisiera realizar el siguiente pedido:\n\n";
 
@@ -722,13 +724,13 @@ function sendWhatsAppOrder() {
     const total = roundUpToTen(Math.max(0, subtotal - discountAmount));
     message += `\n*Total Estimado:* $${total.toLocaleString()}\n\n`;
     
-    // Preparar los datos en formato URLSearchParams (evita bloqueos de Google)
+    // Preparar los datos en formato URLSearchParams
     const formData = new URLSearchParams();
     formData.append('pedido', orderNumber);
     formData.append('telefono', customerPhone);
 
-    // Acá pegá la nueva URL si te generó una distinta, sino dejá esta
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbz36Kin215Ri1i0cpVnjR5IKq0xf4D8yZXrGqgU0bJaeryTT3Z4Sctjf3L0mkOlp-JwTg/exec';
+    // URL de tu Google Apps Script
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwTmQ4R8zdfN_gJHAA9hB02sRQLbSssH5mRBmxS8XcWPfHGqGd_P9lTLEooPJYnk1qlLg/exec';
     
     // Enviar a Google Sheets
     fetch(scriptURL, {
