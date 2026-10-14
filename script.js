@@ -671,11 +671,11 @@ function sendWhatsAppOrder() {
     const now = new Date();
     const day = now.getDate().toString().padStart(2, '0');
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
-    const year = now.getFullYear();
+    const shortYear = now.getFullYear().toString().slice(-2); // Obtiene "26" en lugar de "2026"
 
-    const timestamp = `${day}${month}${year}`;
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    const orderNumber = `GV-${timestamp}-${randomDigits}`;
+    // Nuevo formato de número de pedido: GV-DD/MM/YY-XXXX
+    const orderNumber = `GV-${day}/${month}/${shortYear}-${randomDigits}`;
 
     const status = getDeliveryStatus(); // Obtener el estado actual del horario
 
@@ -693,9 +693,11 @@ function sendWhatsAppOrder() {
 
         if (!priceData.hasDiscount) {
             eligibleSubtotalForVoucher += itemTotal;
+            message += `• ${item.name} (x${item.quantity}) - $${itemTotal.toLocaleString()}\n`;
+        } else {
+            // Muestra en el mensaje si el producto tenía un descuento automático
+            message += `• ${item.name} (x${item.quantity}) - $${itemTotal.toLocaleString()} *(con ${priceData.discountPercent}% OFF)*\n`;
         }
-
-        message += `• ${item.name} (x${item.quantity}) - $${itemTotal.toLocaleString()}\n`;
     });
     
     let rawDiscountAmount = 0;
