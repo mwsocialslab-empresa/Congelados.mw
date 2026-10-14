@@ -140,7 +140,7 @@ function checkBusinessHours() {
 
     if (day >= 1 && day <= 5) {
         // Lunes a Viernes: 12 a 18 hs
-        if (hour >= 15 && hour < 18) isOpen = true;
+        if (hour >= 9 && hour < 18) isOpen = true;
     } else if (day === 6) {
         // Sábados: 9 a 15 hs
         if (hour >= 9 && hour < 15) isOpen = true;
