@@ -46,6 +46,14 @@
         body { font-family: 'Inter', sans-serif; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes cart-jump {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.15); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        .animate-cart-jump {
+            animation: cart-jump 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
     </style>
 </head>
 <body class="bg-relax-bg text-slate-300 flex flex-col min-h-screen relative font-sans antialiased selection:bg-fresh-500 selection:text-white overflow-x-hidden">

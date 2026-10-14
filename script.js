@@ -521,6 +521,21 @@ function addToCart(id) {
     }
     updateCartUI();
     showToast('¡Agregado al carrito!');
+
+    // Activar la animación del ícono del carrito
+    const badge = document.getElementById('cart-badge');
+    if (badge && badge.parentElement) {
+        const cartBtn = badge.parentElement;
+        
+        // Removemos la clase para poder reiniciar la animación si cliquea rápido
+        cartBtn.classList.remove('animate-cart-jump');
+        
+        // Este comando fuerza al navegador a "leer" el estado actual, reiniciando el ciclo
+        void cartBtn.offsetWidth; 
+        
+        // Volvemos a agregar la clase que hace saltar el botón
+        cartBtn.classList.add('animate-cart-jump');
+    }
 }
 
 function updateCartQuantity(id, delta) {
