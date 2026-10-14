@@ -722,22 +722,22 @@ function sendWhatsAppOrder() {
     const total = roundUpToTen(Math.max(0, subtotal - discountAmount));
     message += `\n*Total Estimado:* $${total.toLocaleString()}\n\n`;
     
-    // Enviar los datos a Google Sheets en segundo plano
-    const scriptURL = 'https://script.google.com/macros/library/d/1GCAtXvv2AYR78GHM2NvuyDtNghNAU9qP9_Qyhnv6ws3f9djReFholJId/1';
+    // Preparar los datos en formato URLSearchParams (evita bloqueos de Google)
+    const formData = new URLSearchParams();
+    formData.append('pedido', orderNumber);
+    formData.append('telefono', customerPhone);
+
+    // Acá pegá la nueva URL si te generó una distinta, sino dejá esta
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz36Kin215Ri1i0cpVnjR5IKq0xf4D8yZXrGqgU0bJaeryTT3Z4Sctjf3L0mkOlp-JwTg/exec';
     
+    // Enviar a Google Sheets
     fetch(scriptURL, {
         method: 'POST',
-        mode: 'no-cors', // Evita bloqueos de seguridad del navegador
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            pedido: orderNumber,
-            telefono: customerPhone
-        })
+        mode: 'no-cors',
+        body: formData
     }).catch(error => console.error('Error al guardar:', error));
 
-    // Abrir WhatsApp
+    // Abrir WhatsApp inmediatamente
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5491127461954?text=${encodedMessage}`, '_blank');
 }
