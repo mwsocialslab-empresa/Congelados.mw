@@ -662,6 +662,7 @@ function updateCartUI() {
 }
 
 // Envío a WhatsApp y Google Sheets
+
 function sendWhatsAppOrder() {
     if (cart.length === 0) {
         alert('El carrito está vacío');
@@ -673,7 +674,7 @@ function sendWhatsAppOrder() {
     const customerPhone = phoneInput ? phoneInput.value.trim() : '';
 
     if (!customerPhone) {
-        alert('Por favor, ingresá tu número de WhatsApp para el registro.');
+        alert('Por favor, ingresá tu número de WhatsApp.');
         return;
     }
 
@@ -730,7 +731,7 @@ function sendWhatsAppOrder() {
     formData.append('telefono', customerPhone);
 
     // URL de tu Google Apps Script
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwTmQ4R8zdfN_gJHAA9hB02sRQLbSssH5mRBmxS8XcWPfHGqGd_P9lTLEooPJYnk1qlLg/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbydE_Fi-wvEqMfxlai6PpOOMxuAbFvScdyzI4nsHcycdRboaQJFpPjB2y_EbWWElgGzAQ/exec';
     
     // Enviar a Google Sheets
     fetch(scriptURL, {
@@ -739,9 +740,21 @@ function sendWhatsAppOrder() {
         body: formData
     }).catch(error => console.error('Error al guardar:', error));
 
-    // Abrir WhatsApp inmediatamente
+    // 1. Cerramos el modal del carrito
+    toggleCartModal();
+
+    // 2. Vaciamos el carrito y limpiamos los datos
+    cart = [];
+    if (phoneInput) phoneInput.value = '';
+    appliedVoucher = null;
+    updateCartUI();
+
+    // 3. Volvemos al inicio de la página suavemente
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // 4. Abrimos WhatsApp en la misma pestaña (evita la página en blanco)
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5491127461954?text=${encodedMessage}`, '_blank');
+    window.location.href = `https://wa.me/5491127461954?text=${encodedMessage}`;
 }
 
 // ==========================================
