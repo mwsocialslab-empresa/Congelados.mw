@@ -395,6 +395,13 @@
                     <span>Total estimado:</span>
                     <span id="cart-total">$0</span>
                 </div>
+
+                <!-- NUEVO: Campo para el teléfono del cliente -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Tu número de WhatsApp (para el registro):</label>
+                    <input type="tel" id="customer-phone" placeholder="Ej: 1123456789" class="w-full bg-slate-800 px-3 py-2 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors placeholder-slate-500">
+                </div>
+
                 <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl flex items-center justify-center space-x-2 shadow-lg shadow-emerald-900/50 transition-all">
                     <i class="fa-brands fa-whatsapp text-xl"></i>
                     <span>Pedir por WhatsApp</span>

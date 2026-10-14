@@ -661,23 +661,31 @@ function updateCartUI() {
     }
 }
 
-// Envío a WhatsApp
+// Envío a WhatsApp y Google Sheets
 function sendWhatsAppOrder() {
     if (cart.length === 0) {
         alert('El carrito está vacío');
         return;
     }
 
+    // Obtener el teléfono del cliente
+    const phoneInput = document.getElementById('customer-phone');
+    const customerPhone = phoneInput ? phoneInput.value.trim() : '';
+
+    if (!customerPhone) {
+        alert('Por favor, ingresá tu número de WhatsApp para el registro.');
+        return;
+    }
+
     const now = new Date();
     const day = now.getDate().toString().padStart(2, '0');
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
-    const shortYear = now.getFullYear().toString().slice(-2); // Obtiene "26" en lugar de "2026"
+    const shortYear = now.getFullYear().toString().slice(-2);
 
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    // Nuevo formato de número de pedido: GV-DD/MM/YY-XXXX
     const orderNumber = `GV-${day}/${month}/${shortYear}-${randomDigits}`;
 
-    const status = getDeliveryStatus(); // Obtener el estado actual del horario
+    const status = getDeliveryStatus(); 
 
     let message = `🛒 *NUEVO PEDIDO: ${orderNumber}*\n`;
     message += `⏱️ *Disponibilidad:* ${status.label}\n\n`;
@@ -695,7 +703,6 @@ function sendWhatsAppOrder() {
             eligibleSubtotalForVoucher += itemTotal;
             message += `• ${item.name} (x${item.quantity}) - $${itemTotal.toLocaleString()}\n`;
         } else {
-            // Muestra en el mensaje si el producto tenía un descuento automático
             message += `• ${item.name} (x${item.quantity}) - $${itemTotal.toLocaleString()} *(con ${priceData.discountPercent}% OFF)*\n`;
         }
     });
@@ -715,6 +722,22 @@ function sendWhatsAppOrder() {
     const total = roundUpToTen(Math.max(0, subtotal - discountAmount));
     message += `\n*Total Estimado:* $${total.toLocaleString()}\n\n`;
     
+    // Enviar los datos a Google Sheets en segundo plano
+    const scriptURL = 'https://script.google.com/macros/library/d/1GCAtXvv2AYR78GHM2NvuyDtNghNAU9qP9_Qyhnv6ws3f9djReFholJId/1';
+    
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // Evita bloqueos de seguridad del navegador
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            pedido: orderNumber,
+            telefono: customerPhone
+        })
+    }).catch(error => console.error('Error al guardar:', error));
+
+    // Abrir WhatsApp
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/5491127461954?text=${encodedMessage}`, '_blank');
 }
