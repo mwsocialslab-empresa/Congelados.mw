@@ -55,6 +55,194 @@
             animation: cart-jump 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
     </style>
+    <!-- WIDGET DE CHAT Y BOTÓN FLOTANTE CONGELA2 -->
+<!-- WIDGET DE CHAT Y BOTÓN FLOTANTE CONGELA2 -->
+<style>
+    /* Botón Flotante (Movido a la IZQUIERDA para no pisar WhatsApp) */
+    #congela2-chat-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px; /* Cambiado de right a left */
+        right: auto;
+        background-color: #10b981; /* Verde fresco */
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 14px 22px;
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+        cursor: pointer;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+    #congela2-chat-btn:hover {
+        transform: scale(1.05);
+        background-color: #059669;
+    }
+
+    /* Ventana del Chat (Movido a la IZQUIERDA) */
+    #congela2-chat-box {
+        display: none; /* Oculto por defecto */
+        position: fixed;
+        bottom: 80px;
+        left: 20px; /* Cambiado de right a left */
+        right: auto;
+        width: 360px;
+        max-width: 90vw;
+        height: 520px;
+        max-height: 80vh;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        z-index: 9999;
+        flex-direction: column;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, sans-serif;
+        border: 1px solid #e5e7eb;
+    }
+
+    /* Encabezado del Chat */
+    .chat-header {
+        background-color: #10b981;
+        color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .chat-header h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .chat-header p {
+        margin: 2px 0 0 0;
+        font-size: 12px;
+        opacity: 0.9;
+    }
+    .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        line-height: 1;
+    }
+
+    /* Área de Mensajes */
+    .chat-messages {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background-color: #f9fafb;
+    }
+    .message {
+        max-width: 82%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+    }
+    .message.bot {
+        background-color: #ffffff;
+        color: #1f2937;
+        align-self: flex-start;
+        border: 1px solid #e5e7eb;
+        border-bottom-left-radius: 2px;
+    }
+    .message.user {
+        background-color: #10b981;
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 2px;
+    }
+
+    /* Área de Input */
+    .chat-input-container {
+        padding: 12px;
+        background-color: #ffffff;
+        border-top: 1px solid #e5e7eb;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    /* MEJORA: Texto oscuro y visible en el textarea */
+    .chat-input-container textarea {
+        flex: 1;
+        border: 1px solid #c1c5cb; /* Borde un poco más visible */
+        border-radius: 8px;
+        padding: 10px 12px;
+        font-size: 14px; /* Un poco más grande */
+        color: #1f2937 !important; /* Forzar el texto a gris oscuro/negro */
+        background-color: #ffffff !important; /* Fondo blanco */
+        resize: none;
+        height: 42px; /* Mayor espacio vertical */
+        font-family: inherit;
+        outline: none;
+        box-sizing: border-box;
+    }
+    .chat-input-container textarea::placeholder {
+        color: #9ca3af; /* Color gris suave para el marcador de posición */
+    }
+    .chat-input-container textarea:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+    }
+    .chat-input-container button {
+        background-color: #10b981;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 18px;
+        font-weight: 600;
+        cursor: pointer;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .chat-input-container button:hover {
+        background-color: #059669;
+    }
+</style>
+
+<!-- BOTÓN Y VENTANA -->
+<button id="congela2-chat-btn" onclick="toggleChat()">
+    💬 Asesor Congela2
+</button>
+
+<div id="congela2-chat-box">
+    <div class="chat-header">
+        <div>
+            <h4>Asesor Congela2</h4>
+            <p>Calcula tu compra ideal de congelados</p>
+        </div>
+        <button class="close-btn" onclick="toggleChat()">&times;</button>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+        <div class="message bot">
+            ¡Hola! 👋 Soy tu asesor de Congela2. ¿Cuántos adultos y niños son en casa y para cuántos días quieres planificar tu compra de vegetales o frutas?
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <textarea id="chat-user-input" placeholder="Ej: Somos 2 adultos para 15 días..." rows="1"></textarea>
+        <button onclick="enviarMensaje()">Enviar</button>
+    </div>
+</div>
+
+
 </head>
 <body class="bg-relax-bg text-slate-300 flex flex-col min-h-screen relative font-sans antialiased selection:bg-fresh-500 selection:text-white overflow-x-hidden">
 

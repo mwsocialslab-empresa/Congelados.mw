@@ -20,7 +20,7 @@ const IMAGES = {
 // 1. CONFIGURACIÓN DE VOUCHERS / CUPONES
 // ==========================================
 const VOUCHERS = {
-    'BIENVENIDA10': { type: 'percent', value: 10, label: '10% OFF Bienvenida' },
+    'BIENVENIDO': { type: 'percent', value: 10, label: '10% OFF Bienvenido' },
     'GOURMET15': { type: 'percent', value: 15, label: '15% OFF Especial' },
     'DESCUENTO2000': { type: 'fixed', value: 2000, label: '$2.000 OFF en tu compra' }
 };
@@ -50,6 +50,26 @@ const TIMED_DISCOUNTS = [
 ];
 
 // Datos del catálogo
+const productosCongela2 = [
+    // LÍNEA COCINA RÁPIDA
+    { nombre: "Combo Wok / Salteado Clásico", categoria: "Vegetales", presentaciones: ["300g", "500g"], ingredientes: "Morrón rojo, morrón verde, cebolla, zanahoria, chauchas o zapallito" },
+    { nombre: "Combo Wok Gourmet / Veggie", categoria: "Vegetales", presentaciones: ["300g", "500g"], ingredientes: "Brócoli, zanahoria, cebolla morada, hongos, puerro" },
+    { nombre: "Combo Mix Sopas y Cremas Nutritivas", categoria: "Vegetales", presentaciones: ["500g"], ingredientes: "Zapallo anco, zanahoria, puerro, apio, choclo, espinaca/acelga" },
+
+    // LÍNEA SMOOTHIES Y BATIDOS
+    { nombre: "Combo Smoothie Red Antioxidante (Pack x5)", categoria: "Frutas", presentaciones: ["150g x 5"], ingredientes: "Frutilla, arándanos, banana" },
+    { nombre: "Combo Smoothie Detox Verde (Pack x5)", categoria: "Frutas / Mix", presentaciones: ["150g x 5"], ingredientes: "Espinaca, manzana verde, ananá, jengibre" },
+
+    // LÍNEA BÁSICOS DE COCINA
+    { nombre: "Cebolla Picada", categoria: "Básicos", presentaciones: ["300g", "500g"] },
+    { nombre: "Morrón Mix (Rojo y Verde)", categoria: "Básicos", presentaciones: ["300g"] },
+    { nombre: "Base Provenzal (Ajo + Perejil)", categoria: "Básicos", presentaciones: ["150g", "250g"] },
+    { nombre: "Zanahoria Rallada / Cubos", categoria: "Básicos", presentaciones: ["300g", "500g"] },
+    { nombre: "Espinaca Hoja Lista", categoria: "Básicos", presentaciones: ["300g"] },
+
+    // COMBO LANZAMIENTO
+    { nombre: "Combo Probame (Pack Degustación)", categoria: "Combos", presentaciones: ["Kit Completo"], ingredientes: "1 Wok Clásico 300g + 1 Mix Sopas 500g + 1 Mix Cebolla/Morrón 300g + 1 Smoothie 150g" }
+];
 // Datos del catálogo ampliados con descripciones
 const products = [
     { 
@@ -945,3 +965,101 @@ function closeCustomAlert() {
         }, 300);
     }
 }
+
+
+
+    // Configuración con tus credenciales de CrewAI
+    const CREWAI_API_BASE_URL = "https://asesor-de-compras-congela2-v1-41b5e245-d5b7-1c3487e8.crewai.com"; 
+    const CREWAI_BEARER_TOKEN = "46da1609e267"; 
+
+    function toggleChat() {
+        const chatBox = document.getElementById("congela2-chat-box");
+        if (chatBox.style.display === "flex") {
+            chatBox.style.display = "none";
+        } else {
+            chatBox.style.display = "flex";
+        }
+    }
+
+    async function enviarMensaje() {
+        const inputEl = document.getElementById("chat-user-input");
+        const mensajeTexto = inputEl.value.trim();
+
+        if (!mensajeTexto) return;
+
+        // 1. Mostrar mensaje del usuario
+        agregarMensaje(mensajeTexto, "user");
+        inputEl.value = "";
+
+        // 2. Mostrar indicador de procesamiento
+        const loadingId = agregarMensaje("Calculando porciones y consultando stock...", "bot");
+
+        // Construcción automática de la ruta /kickoff
+        const endpoint = CREWAI_API_BASE_URL.endsWith('/kickoff') || CREWAI_API_BASE_URL.endsWith('/run') 
+            ? CREWAI_API_BASE_URL 
+            : `${CREWAI_API_BASE_URL.replace(/\/$/, '')}/kickoff`;
+
+        try {
+            // 3. Petición POST a CrewAI Studio
+            const respuesta = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${CREWAI_BEARER_TOKEN}`
+                },
+                body: JSON.stringify({
+                    inputs: {
+                        consulta_del_cliente: mensajeTexto
+                    }
+                })
+            });
+
+            if (!respuesta.ok) {
+                throw new Error(`Estado HTTP: ${respuesta.status}`);
+            }
+
+            const data = await respuesta.json();
+            console.log("Respuesta recibida de CrewAI:", data);
+
+            // Quitar mensaje de carga
+            const loadingNode = document.getElementById(loadingId);
+            if (loadingNode) loadingNode.remove();
+
+            // 4. Mapeo de la respuesta según la estructura de CrewAI
+            let respuestaTexto = "";
+            if (typeof data === "string") {
+                respuestaTexto = data;
+            } else if (data.result) {
+                respuestaTexto = typeof data.result === "object" ? JSON.stringify(data.result) : data.result;
+            } else if (data.raw) {
+                respuestaTexto = data.raw;
+            } else if (data.tasks_output && Array.isArray(data.tasks_output) && data.tasks_output.length > 0) {
+                const ultimaTarea = data.tasks_output[data.tasks_output.length - 1];
+                respuestaTexto = ultimaTarea.raw || ultimaTarea.result || JSON.stringify(ultimaTarea);
+            } else {
+                respuestaTexto = data.message || "Solicitud procesada correctamente.";
+            }
+
+            // 5. Mostrar respuesta final
+            agregarMensaje(respuestaTexto, "bot");
+
+        } catch (error) {
+            console.error("Error en la conexión con la API:", error);
+            const loadingNode = document.getElementById(loadingId);
+            if (loadingNode) {
+                loadingNode.innerText = "No se pudo conectar con el servidor. Revisa los datos de autorización en la consola (F12).";
+            }
+        }
+    }
+
+    function agregarMensaje(texto, tipo) {
+        const container = document.getElementById("chat-messages");
+        const msgDiv = document.createElement("div");
+        const id = "msg-" + Date.now();
+        msgDiv.id = id;
+        msgDiv.className = `message ${tipo}`;
+        msgDiv.innerText = texto;
+        container.appendChild(msgDiv);
+        container.scrollTop = container.scrollHeight;
+        return id;
+    }
