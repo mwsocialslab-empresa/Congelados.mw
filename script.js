@@ -19,11 +19,11 @@ const IMAGES = {
 // ==========================================
 // 1. CONFIGURACIÓN DE VOUCHERS / CUPONES
 // ==========================================
-const VOUCHERS = {
-    'BIENVENIDO': { type: 'percent', value: 10, label: '10% OFF Bienvenido' },
-    'GOURMET15': { type: 'percent', value: 15, label: '15% OFF Especial' },
-    'DESCUENTO2000': { type: 'fixed', value: 2000, label: '$2.000 OFF en tu compra' }
-};
+//const VOUCHERS = {
+    //'BIENVENIDO': { type: 'percent', value: 10, label: '10% OFF Bienvenido' },
+   // 'GOURMET15': { type: 'percent', value: 15, label: '15% OFF Especial' },
+  //  'DESCUENTO2000': { type: 'fixed', value: 2000, label: '$2.000 OFF en tu compra' }
+//};
 
 // ==========================================
 // 2. CONFIGURACIÓN DE DESCUENTOS POR TIEMPO LIMITADO
